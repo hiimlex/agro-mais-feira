@@ -1,15 +1,19 @@
 <template>
-  <v-app class="poppins-font bc-white">
-        <v-content class="grey lighten-4 justify-content-center" transition="fade-transition">
-            <router-view transition="fade"/>
-        </v-content>
-  </v-app>  
+  <v-app class="poppins-font">
+    <Navbarxl />
+    <v-content class="grey lighten-4 justify-content-center" transition="fade-transition">
+      <router-view transition="fade" />
+    </v-content>
+  </v-app>
 </template>
 
 <script>
+import Navbarxl from "./components/Navbarxl";
 export default {
   name: "App",
-
+  components: {
+    Navbarxl
+  },
   data: () => ({
     //
   })
@@ -18,9 +22,6 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap");
 
-html {
-  overflow: hidden !important;
-}
 .poppins-font {
   font-family: "Poppins", sans-serif !important;
 }
@@ -29,5 +30,34 @@ html {
 }
 .success {
   color: #009b36 !important;
+}
+.hover-link:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 1px 1px #009b36, 2px 2px #009b36, 3px 3px #009b36;
+  -webkit-transform: translateX(-3px);
+  transform: translateX(-3px);
+}
+.hover-link-card:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 4px 4px #009b36, 3px 3px #009b36, 3px 3px #009b36;
+  -webkit-transform: translateY(-6px);
+  transform: translateY(-6px);
+  transition: 0.3s;
+}
+.radius-plus {
+  border-radius: 30px !important;
+}
+.logo {
+  font-size: 36px !important;
+  font-weight: 700;
+  color: #009b36;
+}
+.router-bar {
+  text-decoration: none;
+}
+.float-and-center {
+  margin-top: 10% !important;
 }
 </style>
