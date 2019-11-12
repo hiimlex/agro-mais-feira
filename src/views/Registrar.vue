@@ -1,9 +1,9 @@
 <template>
   <v-container class="my-auto">
-    <v-row class="justify-center mt-5">
+    <v-row justify="center" align="center">
       <v-col cols="12" sm="10" lg="6" xl="6">
         <v-form>
-          <v-card class="mx-auto" max-width="500">
+          <v-card class="mx-auto">
             <v-card-title class="title font-weight-regular justify-center">
               <span>Crie sua conta Agro+Feira</span>
             </v-card-title>
@@ -84,10 +84,10 @@
           :timeout="timeout"
         >{{ message }}</v-snackbar>
         <v-row justify="center">
-          <v-dialog v-model="modal" persistent max-width="290" scrollable>
+          <v-dialog v-model="modal" persistent max-width="60%" scrollable>
             <v-card>
               <v-card-title class="headline">Termos de usuário</v-card-title>
-              <v-card-text>
+              <v-card-text class="text-justify">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.

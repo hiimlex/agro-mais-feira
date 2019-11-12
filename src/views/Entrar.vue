@@ -1,6 +1,6 @@
 <template>
   <v-container class="my-auto">
-    <v-row class="justify-center mt-5">
+    <v-row justify="center" align="center">
       <v-col cols="12" sm="10" lg="6" xl="6">
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-card class="mx-auto text-center">
@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     logar() {
-      this.$store.dispatch("logarUsuario", this.login).then(response => {
+      this.$store.dispatch("logarUsuario", this.login).then(() => {
         this.$router.push("/");
       });
     }

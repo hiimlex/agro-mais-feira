@@ -1,6 +1,6 @@
 <template>
   <v-container class="my-auto">
-    <v-row class="justify-center mt-5">
+    <v-row justify="center" align="center">
       <v-col cols="12" sm="10" lg="6" xl="6">
         <v-card class="mx-auto text-center" max-width="500">
           <v-card-title class="title font-weight-regular justify-center">

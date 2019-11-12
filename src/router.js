@@ -4,6 +4,7 @@ import Index from './views/Index'
 import Registrar from './views/Registrar'
 import Entrar from './views/Entrar'
 import Recuperarsenha from './views/Recuperarsenha'
+import Anunciar from './views/Anunciar'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/recuperarsenha',
     name: 'recuperarsenha',
     component: Recuperarsenha
+  },
+  {
+    path: '/anunciar',
+    name: 'anunciar',
+    component: Anunciar
   }
 
 ]
