@@ -1,11 +1,14 @@
 <template>
-  <v-container class="my-auto">
+  <v-container fluid class="my-auto mt-12">
     <v-row justify="center" align="center">
       <v-col cols="12" sm="10" lg="6" xl="6">
         <v-form>
           <v-card class="mx-auto">
+            <router-link to="/" class="router-bar">
+              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+            </router-link>
             <v-card-title class="title font-weight-regular justify-center">
-              <span>Anunciar Produto</span>
+              <span class>Anunciar Produto</span>
             </v-card-title>
             <v-divider></v-divider>
             <v-container>
@@ -29,7 +32,7 @@
                 clearable
               ></v-file-input>-->
               <v-divider></v-divider>
-              <v-subheader class="text-uppercase">Informações do produto:</v-subheader>
+              <v-subheader class="text-uppercase justify-center">Informações do produto:</v-subheader>
               <v-text-field
                 filled
                 shaped

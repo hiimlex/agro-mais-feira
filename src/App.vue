@@ -1,19 +1,18 @@
 <template>
   <v-app class="poppins-font" dark>
-    <Navbarxl />
-    <v-content class="grey lighten-4 justify-content-center" transition="fade-transition">
+    <v-content
+      class="grey lighten-3 justify-content-center"
+      transition="fade-transition"
+      align-center
+    >
       <router-view transition="fade" />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Navbarxl from "./components/Navbarxl";
 export default {
   name: "App",
-  components: {
-    Navbarxl
-  },
   data: () => ({
     //
   })
@@ -45,6 +44,13 @@ export default {
   -webkit-transform: translateX(-3px);
   transform: translateX(-3px);
 }
+.hover-card:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 1px 1px #009b36, 3px 1px #009b36, 3px 1px #009b36;
+  -webkit-transform: translateX(-3px);
+  transform: translateX(-3px);
+}
 .v-btn--active {
   border-bottom: 2px solid #009b36 !important;
 }
@@ -65,11 +71,20 @@ export default {
 .categorias-color-bc {
   background-color: #009b36;
   position: absolute;
-  bottom: 0;
+  bottom: 15px;
   width: 100%;
   height: 36px;
 }
 .text-capitalize {
   text-transform: capitalize !important;
+}
+.decoration-link {
+  text-decoration: none;
+  color: #3f51b5;
+}
+@media (max-width: 600px) {
+  .categorias-color-bc {
+    bottom: 0px;
+  }
 }
 </style>

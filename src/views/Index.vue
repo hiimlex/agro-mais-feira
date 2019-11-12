@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbarxl />
     <v-container class="my-auto">
       <!-- <v-alert v-if="perfil_inc" class="white--text" color="success" icon="person" dismissible prominent dense >
       {{p_incomplete}}
@@ -61,6 +62,7 @@
 </template>
 
 <script>
+import Navbarxl from "../components/Navbarxl";
 import { api } from "@/services";
 import Cards from "../components/Cards";
 import { getCategorias } from "@/helpers";
@@ -89,6 +91,6 @@ export default {
       console.log(e);
     }
   },
-  components: { Cards }
+  components: { Cards, Navbarxl }
 };
 </script>

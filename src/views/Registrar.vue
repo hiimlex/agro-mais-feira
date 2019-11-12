@@ -1,9 +1,12 @@
 <template>
-  <v-container class="my-auto">
+  <v-container class="my-auto mt-8">
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="10" lg="6" xl="6">
+      <v-col cols="12" sm="10" lg="5" xl="5">
         <v-form>
           <v-card class="mx-auto">
+            <router-link to="/" class="router-bar">
+              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+            </router-link>
             <v-card-title class="title font-weight-regular justify-center">
               <span>Crie sua conta Agro+Feira</span>
             </v-card-title>
@@ -62,18 +65,27 @@
                 @click.prevent="aceitarTermos()"
               ></v-checkbox>
             </v-card-text>
-
-            <v-divider></v-divider>
             <v-card-actions>
-              <v-btn text to="/entrar">Fazer login</v-btn>
-              <div class="flex-grow-1"></div>
-              <v-btn
-                color="success"
-                @click="createAccount"
-                class="white--text"
-                :disabled="!active"
-              >Criar conta</v-btn>
+              <v-row class="justify-center">
+                <v-col cols="10">
+                  <v-btn
+                    color="success"
+                    @click="createAccount"
+                    class="white--text mt-n6"
+                    :disabled="!active"
+                    block
+                    rounded
+                    large
+                  >Criar conta</v-btn>
+                </v-col>
+              </v-row>
             </v-card-actions>
+            <v-container>
+              <p class="text-center">
+                Já possui conta ?
+                <router-link to="/entrar" class="decoration-link">Faça login</router-link>
+              </p>
+            </v-container>
           </v-card>
         </v-form>
         <!-- snackbar -->
@@ -84,7 +96,7 @@
           :timeout="timeout"
         >{{ message }}</v-snackbar>
         <v-row justify="center">
-          <v-dialog v-model="modal" persistent max-width="60%" scrollable>
+          <v-dialog v-model="modal" persistent max-width="40%" scrollable>
             <v-card>
               <v-card-title class="headline">Termos de usuário</v-card-title>
               <v-card-text class="text-justify">
@@ -94,7 +106,7 @@
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.
               </v-card-text>
               <v-card-actions>
-                <v-btn color="green darken-1" text @click="negarTermos">Negar</v-btn>
+                <v-btn color="indigo" text @click="negarTermos">Negar</v-btn>
                 <div class="flex-grow-1"></div>
                 <v-btn color="green darken-1" text @click="modal = false">Aceito</v-btn>
               </v-card-actions>

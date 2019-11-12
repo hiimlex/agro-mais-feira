@@ -1,11 +1,14 @@
 <template>
-  <v-container class="my-auto">
-    <v-row justify="center" align="center">
-      <v-col cols="12" sm="10" lg="6" xl="6">
+  <v-container fluid class="my-auto mt-12">
+    <v-row align="center" justify="center">
+      <v-col cols="12" sm="10" lg="5" xl="5">
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-card class="mx-auto text-center">
+            <router-link to="/" class="router-bar">
+              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+            </router-link>
             <v-card-title class="title font-weight-regular justify-center">
-              <span>Olá! Insira seu E-mail e Senha para continuar.</span>
+              <span>Olá! Insira seu CPF e Senha para continuar.</span>
             </v-card-title>
             <v-card-text>
               <!-- :rules="emailRules" -->
@@ -36,21 +39,28 @@
                 hint="Sua senha deve conter mais de 6 caracteres."
                 v-on:keyup.enter="logar"
               ></v-text-field>
-              <v-spacer></v-spacer>
-              <v-btn
-                class="success--text white"
-                text
-                depressed
-                to="/recuperarsenha"
-              >Não sei minha senha</v-btn>
             </v-card-text>
-            <v-divider></v-divider>
             <v-card-actions>
-              <v-btn text to="/registrar">Criar conta</v-btn>
-              <div class="flex-grow-1"></div>
-              <v-btn :disabled="!valid" color="success" class="white--text">Login</v-btn>
-              <!-- @click.prevent="logar" -->
+              <v-row class="justify-center">
+                <v-col cols="10">
+                  <v-btn
+                    :disabled="!valid"
+                    color="success"
+                    class="white--text mt-n10"
+                    block
+                    rounded
+                    large
+                  >Entrar</v-btn>
+                  <!-- @click.prevent="logar" -->
+                </v-col>
+              </v-row>
             </v-card-actions>
+            <v-container>
+              <p>
+                Não possui conta ?
+                <router-link to="/registrar" class="decoration-link">Criar conta</router-link>
+              </p>
+            </v-container>
           </v-card>
         </v-form>
       </v-col>
