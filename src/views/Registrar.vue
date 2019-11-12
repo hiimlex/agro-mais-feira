@@ -142,7 +142,8 @@ export default {
       status: false,
       modal: false,
       pass: null,
-      passRules: [v => v >= 6 || "Sua senha deve possuir mais de 6 caracteres"]
+      passRules: [v => v >= 6 || "Sua senha deve possuir mais de 6 caracteres"],
+      contato: ""
     };
   },
   methods: {
