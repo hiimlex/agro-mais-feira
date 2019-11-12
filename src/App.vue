@@ -62,4 +62,14 @@ export default {
 .float-and-center {
   margin-top: 10% !important;
 }
+.categorias-color-bc {
+  background-color: #009b36;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 36px;
+}
+.text-capitalize {
+  text-transform: capitalize !important;
+}
 </style>

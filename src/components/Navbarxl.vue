@@ -16,9 +16,7 @@
           <v-toolbar-title class="logo ml-3">Agro+Feira</v-toolbar-title>
         </div>
       </router-link>
-      <v-btn icon disabled>
-        <v-icon></v-icon>
-      </v-btn>
+      <div class="flex-grow-1"></div>
       <v-text-field
         autofocus
         placeholder="Buscar"

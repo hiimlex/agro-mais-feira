@@ -63,7 +63,6 @@
 <script>
 import { api } from "@/services";
 import Cards from "../components/Cards";
-import { mapState } from "vuex";
 import { getCategorias } from "@/helpers";
 
 export default {

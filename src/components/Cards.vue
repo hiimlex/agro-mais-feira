@@ -18,14 +18,19 @@
           link
           :to="{name: 'produto', params:{id: produto.id}}"
         >
-          <v-img max-height="60%" min-height="60%" :src="produto.imagem_produto[0].imagem"></v-img>
-          <v-card-title class="justify-center mb-n2 text-no-wrap">{{produto.nome}}</v-card-title>
+          <v-img max-height="50%" min-height="50%" :src="produto.imagem_produto[0].imagem"></v-img>
+          <v-card-title class="justify-center mb-n3 text-no-wrap">{{produto.nome}}</v-card-title>
           <v-card-text class="justify-center mb-n5">
             <v-row
               class="justify-center subtitle-1 text-truncate"
             >{{produto.produtor.pessoa[0].nome}}</v-row>
             <v-row class="justify-center green--text subtitle-2">R$ {{produto.preco}}</v-row>
           </v-card-text>
+          <div class="categorias-color-bc mb-n4 mt-2">
+            <v-list-item dense>
+              <v-list-item-content class="justify-center white--text">Categoria</v-list-item-content>
+            </v-list-item>
+          </div>
         </v-card>
       </v-hover>
     </v-col>
@@ -45,9 +50,7 @@ export default {
   computed: {
     url() {
       const query = serialize(this.$route.query);
-      console.log(query);
       if (query) {
-        console.log(`produtos${query}`);
         return `produtos${query}`;
       } else {
         return "/produtos";
@@ -60,7 +63,6 @@ export default {
       api.get(this.url).then(response => {
         if (response.data) {
           this.produtos = response.data.produtos;
-          console.log(this.produtos);
         }
       });
     }

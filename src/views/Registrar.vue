@@ -5,21 +5,42 @@
         <v-form>
           <v-card class="mx-auto" max-width="500">
             <v-card-title class="title font-weight-regular justify-center">
-              <span>Crie sua contra Agro+</span>
+              <span>Crie sua conta Agro+Feira</span>
             </v-card-title>
             <v-card-text>
               <v-text-field
-                type="email"
                 filled
                 color="success"
-                v-model="email"
-                :rules="emailRules"
-                label="Email"
+                v-model="nome"
+                label="Nome"
                 required
-                autocorrect="off"
-                autocapitalize="none"
+                autofocus
                 shaped
-                hint="Este é o email que você irá utilizar para entrar na sua conta Agro+"
+                hint="Digite seu Nome completo"
+                counter
+                maxlength="40"
+              ></v-text-field>
+              <v-text-field
+                filled
+                color="success"
+                v-model="cpf"
+                label="CPF"
+                required
+                mask="true"
+                v-mask="mask"
+                shaped
+                hint="Este é o CPF que você irá utilizar para entrar na sua conta Agro+Feira"
+              ></v-text-field>
+              <v-text-field
+                filled
+                color="success"
+                v-model="contato"
+                required
+                label="Contato ou Whatsapp"
+                mask="true"
+                v-mask="mask1"
+                shaped
+                hint="Este é o seu Número que será utilizado como Contato"
               ></v-text-field>
               <v-text-field
                 :append-icon="show ? 'visibility' : 'visibility_off'"
@@ -31,7 +52,7 @@
                 :rules="passRules"
                 required
                 shaped
-                hint="Este é a senha que você irá utilizar para entrar na sua conta Agro+"
+                hint="Este é a senha que você irá utilizar para entrar na sua conta Agro+Feira"
               ></v-text-field>
               <v-checkbox
                 v-model="termos"
@@ -73,6 +94,7 @@
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, vel suscipit, id deleniti odio quia a accusantium optio sit nihil eligendi, delectus maiores dicta voluptatem. Deleniti porro quae tempora minima.
               </v-card-text>
               <v-card-actions>
+                <v-btn color="green darken-1" text @click="negarTermos">Negar</v-btn>
                 <div class="flex-grow-1"></div>
                 <v-btn color="green darken-1" text @click="modal = false">Aceito</v-btn>
               </v-card-actions>
@@ -87,23 +109,26 @@
 <script>
 import { api } from "@/services";
 import router from "@/router";
-
+import { mask, mask1 } from "vue-the-mask";
 export default {
+  directives: { mask, mask1 },
   data() {
     return {
+      mask: "###.###.###-##",
+      mask1: "(##) #####-####",
       show: false,
       active: true,
+      nome: "",
       password: "Password",
       cor: "success",
       valid: true,
       timeout: 6000,
       snackbarHidden: false,
       message: null,
-      email: "",
+      cpf: "",
       termos: false,
       status: false,
       modal: false,
-      emailRules: [v => /.+@.+\..+/.test(v) || "Insira um E-mail válido"],
       pass: null,
       passRules: [v => v >= 6 || "Sua senha deve possuir mais de 6 caracteres"]
     };

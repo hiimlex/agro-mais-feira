@@ -4,20 +4,19 @@
       <v-col cols="12" sm="10" lg="6" xl="6">
         <v-card class="mx-auto text-center" max-width="500">
           <v-card-title class="title font-weight-regular justify-center">
-            <span>Insira seu E-mail para recuperar sua senha.</span>
+            <span>Insira seu CPF para recuperar sua senha.</span>
           </v-card-title>
           <v-card-text>
             <v-text-field
-              type="email"
               color="success"
-              v-model="email"
-              label="Email"
+              v-model="cpf"
+              label="CPF"
               required="Required"
-              autocorrect="off"
-              autocapitalize="none"
+              mask="true"
+              v-mask="mask"
               shaped
               filled
-              hint="Insira o email que você utilizou para criar sua conta Agro+."
+              hint="Insira o CPF que você utilizou para criar sua conta Agro+Feira."
             ></v-text-field>
           </v-card-text>
           <v-divider></v-divider>
@@ -33,10 +32,13 @@
 </template>
 
 <script>
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data() {
     return {
-      email: ""
+      cpf: "",
+      mask: "###.###.###-##"
     };
   }
 };

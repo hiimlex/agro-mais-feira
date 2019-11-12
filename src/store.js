@@ -59,7 +59,6 @@ export default new Vuex.Store({
           pessoa: null
         })
         return true
-
       }
     }
 

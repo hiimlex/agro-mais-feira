@@ -10,16 +10,17 @@
             <v-card-text>
               <!-- :rules="emailRules" -->
               <v-text-field
-                type="email"
                 color="success"
-                v-model="login.email"
-                label="Email"
+                v-model="login.cpf"
+                label="CPF"
                 required="Required"
                 autocorrect="off"
                 autocapitalize="none"
                 shaped
+                mask="true"
+                v-mask="'###. ###.###-##'"
                 filled
-                hint="Insira seu E-mail cadastrado na plataforma Agro+."
+                hint="Insira seu CPF cadastrado na plataforma Agro+Feira."
               ></v-text-field>
               <!--  :rules="passRules" -->
               <v-text-field
@@ -47,12 +48,8 @@
             <v-card-actions>
               <v-btn text to="/registrar">Criar conta</v-btn>
               <div class="flex-grow-1"></div>
-              <v-btn
-                :disabled="!valid"
-                color="success"
-                class="white--text"
-                @click.prevent="logar"
-              >Login</v-btn>
+              <v-btn :disabled="!valid" color="success" class="white--text">Login</v-btn>
+              <!-- @click.prevent="logar" -->
             </v-card-actions>
           </v-card>
         </v-form>
@@ -63,17 +60,19 @@
 </template>
 
 <script>
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data() {
     return {
       show: false,
       valid: true,
       password: "Password",
+      mask: "###.###.###-##",
       login: {
-        email: "",
+        cpf: "",
         pass: ""
       },
-      emailRules: [v => /.+@.+\..+/.test(v) || "Insira um E-mail válido"],
       passRules: [v => v >= 6 || "Sua senha deve possuir mais de 6 caracteres"]
     };
   },
