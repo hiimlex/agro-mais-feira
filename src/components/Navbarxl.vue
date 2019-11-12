@@ -77,6 +77,7 @@ export default {
     return {
       drawer: null,
       links: [
+        { icon: "home", name: "Home", route: "/" },
         { icon: "person", name: "Entrar", route: "entrar" },
         { icon: "person_add", name: "Registrar", route: "registrar" },
         { icon: "local_atm", name: "Anunciar", route: "anunciar" }
