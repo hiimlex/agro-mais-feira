@@ -7,12 +7,15 @@
         color="success"
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <v-spacer class="hidden-md-and-up"></v-spacer>
+      <div class="flex-grow-1 hidden-md-and-up"></div>
+      <v-btn icon disabled class="hidden-sm-and-down">
+        <v-icon></v-icon>
+      </v-btn>
       <router-link to="/" class="router-bar">
-        <v-toolbar-title class="logo ml-3">Agro+Feira</v-toolbar-title>
+        <div class="text-center">
+          <v-toolbar-title class="logo ml-3">Agro+Feira</v-toolbar-title>
+        </div>
       </router-link>
-
-      <v-spacer></v-spacer>
       <v-btn icon disabled>
         <v-icon></v-icon>
       </v-btn>
@@ -27,7 +30,12 @@
         class="mt-8 border-color-green-search hidden-sm-and-down"
       >
         <template slot="append">
-          <v-icon v-if="busca" color="success" @click.prevent="buscarProdutos">search</v-icon>
+          <v-icon
+            v-if="busca"
+            color="success"
+            @click.prevent="buscarProdutos"
+            v-on:keyup.enter="buscarProdutos"
+          >search</v-icon>
         </template>
       </v-text-field>
       <v-spacer></v-spacer>
@@ -50,7 +58,7 @@
       <v-divider></v-divider>
       <!-- Links -->
       <v-list dense>
-        <v-list-item v-for="link in links" :key="link.name" link :to="link.route">
+        <v-list-item link color="success" v-for="link in links" :key="link.name" :to="link.route">
           <v-list-item-icon>
             <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-icon>
@@ -73,10 +81,15 @@ export default {
       links: [
         { icon: "person", name: "Entrar", route: "entrar" },
         { icon: "person_add", name: "Registrar", route: "registrar" },
-        { icon: "local_atm", name: "Anunciar", route: "anunciar" },
-        { icon: "info", name: "Blog", route: "blog" }
-      ]
+        { icon: "local_atm", name: "Anunciar", route: "anunciar" }
+      ],
+      busca: null
     };
+  },
+  methods: {
+    buscarProdutos() {
+      this.$router.push({ query: { s: this.busca } });
+    }
   }
 };
 </script>

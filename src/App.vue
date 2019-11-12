@@ -1,5 +1,5 @@
 <template>
-  <v-app class="poppins-font">
+  <v-app class="poppins-font" dark>
     <Navbarxl />
     <v-content class="grey lighten-4 justify-content-center" transition="fade-transition">
       <router-view transition="fade" />
@@ -34,17 +34,19 @@ export default {
 .hover-link:hover {
   background-color: white;
   color: black;
-  box-shadow: 1px 1px #009b36, 2px 2px #009b36, 3px 3px #009b36;
+  box-shadow: 1px 1px #009b36, 2px 2px #009b36, 2px 2px #009b36;
   -webkit-transform: translateX(-3px);
   transform: translateX(-3px);
 }
-.hover-link-card:hover {
+.v-btn--active.hover-link:hover {
   background-color: white;
   color: black;
-  box-shadow: 4px 4px #009b36, 3px 3px #009b36, 3px 3px #009b36;
-  -webkit-transform: translateY(-6px);
-  transform: translateY(-6px);
-  transition: 0.3s;
+  box-shadow: 1px 1px #009b36, 3px 1px #009b36, 3px 1px #009b36;
+  -webkit-transform: translateX(-3px);
+  transform: translateX(-3px);
+}
+.v-btn--active {
+  border-bottom: 2px solid #009b36 !important;
 }
 .radius-plus {
   border-radius: 30px !important;

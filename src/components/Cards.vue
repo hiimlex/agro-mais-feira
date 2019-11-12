@@ -13,12 +13,12 @@
     >
       <v-hover v-slot:default="{ hover }">
         <v-card
-          class="mx-auto justify-content-center pb-4"
-           :elevation="hover ? 12 : 4"
+          class="mx-auto justify-content-center pb-6"
+          :elevation="hover ? 12 : 4"
           link
           :to="{name: 'produto', params:{id: produto.id}}"
         >
-          <v-img max-height="60%" min-height="52%" :src="produto.imagem_produto[0].imagem"></v-img>
+          <v-img max-height="60%" min-height="60%" :src="produto.imagem_produto[0].imagem"></v-img>
           <v-card-title class="justify-center mb-n2 text-no-wrap">{{produto.nome}}</v-card-title>
           <v-card-text class="justify-center mb-n5">
             <v-row

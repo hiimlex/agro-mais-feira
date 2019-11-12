@@ -9,9 +9,9 @@ export default new Vuex.Store({
     login: false,
     p_incomplete: null,
     usuario: {
-        id: null,
-        acao: null,
-        pessoa: []
+      id: null,
+      acao: null,
+      pessoa: []
     }
   },
   mutations: {
@@ -21,10 +21,10 @@ export default new Vuex.Store({
     UPDATE_LOGIN(state, payload) {
       state.login = payload;
     },
-    UPDATE_MESSAGE_PERFIL(state,payload){
-      if (payload){
+    UPDATE_MESSAGE_PERFIL(state, payload) {
+      if (payload) {
         state.p_incomplete = null
-      }else{
+      } else {
         state.p_incomplete = "Para ter acesso a todas as funcionalidades termine seu cadastro!!!"
       }
     }
@@ -48,10 +48,10 @@ export default new Vuex.Store({
           this.dispatch('getPerfil')
         });
     },
-    deslogar(context){
+    deslogar(context) {
       let token = localStorage.removeItem('token')
-      if(!token){
-        context.commit("UPDATE_MESSAGE_PERFIL",false)
+      if (!token) {
+        context.commit("UPDATE_MESSAGE_PERFIL", false)
         context.commit("UPDATE_LOGIN", false);
         context.commit("UPDATE_USUARIO", {
           id: null,

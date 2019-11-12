@@ -19,7 +19,12 @@
             class="mb-n5"
           >
             <template slot="append">
-              <v-icon v-if="busca" color="success" @click.prevent="buscarProdutos">search</v-icon>
+              <v-icon
+                v-if="busca"
+                color="success"
+                @click.prevent="buscarProdutos"
+                v-on:keyup.enter="buscarProdutos"
+              >search</v-icon>
             </template>
           </v-text-field>
         </div>
@@ -51,47 +56,6 @@
           </v-col>
         </v-row>
       </div>
-    </v-container>
-    <v-container fluid class="my-auto grey lighten-2" transition="fade-transition">
-      <v-row class="justify-center">
-        <v-col md="10" xl="12">
-          <h3 class="text-center">
-            EQUIPE RESPONSÁVEL
-            <br />
-            <v-icon color="black" size="32px">developer_mode</v-icon>
-          </h3>
-          <v-row class="justify-center">
-            <v-col md="6" xl="6">
-              <p
-                class="text-center"
-              >Entusiastas e amantes da programação, bacharelandos de Sistemas de Informação no IFCE - Campus Crato!</p>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col md="4" xl="4">
-              <h4 class="text-center">
-                <v-icon color="black" size="32px">account_tree</v-icon>
-                <br />LUCAS
-              </h4>
-              <h5 class="text-center">Infra e Back-End</h5>
-            </v-col>
-            <v-col md="4" xl="4">
-              <h4 class="text-center">
-                <v-icon color="black" size="32px">palette</v-icon>
-                <br />ALEX
-              </h4>
-              <h5 class="text-center">Front-end e UX Design</h5>
-            </v-col>
-            <v-col md="4" xl="4">
-              <h4 class="text-center">
-                <v-icon color="black" size="32px">build</v-icon>
-                <br />RENAN
-              </h4>
-              <h5 class="text-center">Back-end e Banco de Dados</h5>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
     </v-container>
   </div>
 </template>

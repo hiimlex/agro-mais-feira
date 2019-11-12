@@ -1,5 +1,5 @@
 
-export function voltar(i){
+export function voltar(i) {
   this.$router.go(i)
 }
 export function serialize(obj) {

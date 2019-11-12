@@ -6,14 +6,14 @@ const axiosInstance = Axios.create({
 
 
 axiosInstance.interceptors.request.use(
-  function(config) {
+  function (config) {
     const authToken = window.localStorage.token;
     if (authToken) {
       config.headers.token = authToken;
     }
     return config;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   }
 )
