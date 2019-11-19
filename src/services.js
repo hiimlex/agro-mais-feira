@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const axiosInstance = Axios.create({
-  baseURL: 'https://agromaisteste.herokuapp.com/'
+  baseURL: 'https://agromais-feira.herokuapp.com/'
 })
 
 

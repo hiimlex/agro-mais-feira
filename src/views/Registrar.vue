@@ -14,7 +14,7 @@
               <v-text-field
                 filled
                 color="success"
-                v-model="nome"
+                v-model="user.name"
                 label="Nome"
                 required
                 autofocus
@@ -26,7 +26,7 @@
               <v-text-field
                 filled
                 color="success"
-                v-model="cpf"
+                v-model="user.cpf"
                 label="CPF"
                 required
                 mask="true"
@@ -37,7 +37,7 @@
               <v-text-field
                 filled
                 color="success"
-                v-model="contato"
+                v-model="user.phone"
                 required
                 label="Contato ou Whatsapp"
                 mask="true"
@@ -51,7 +51,7 @@
                 label="Senha"
                 :type="show ? 'text' : 'password'"
                 color="success"
-                v-model="pass"
+                v-model="user.password"
                 :rules="passRules"
                 required
                 shaped
@@ -127,23 +127,25 @@ export default {
   data() {
     return {
       mask: "###.###.###-##",
-      mask1: "(##) #####-####",
+      mask1: "(##)#####-####",
       show: false,
       active: true,
-      nome: "",
-      password: "Password",
       cor: "success",
       valid: true,
       timeout: 6000,
       snackbarHidden: false,
       message: null,
-      cpf: "",
       termos: false,
       status: false,
       modal: false,
-      pass: null,
       passRules: [v => v >= 6 || "Sua senha deve possuir mais de 6 caracteres"],
-      contato: ""
+      user: {
+        name: null,
+        cpf: null,
+        phone: null,
+        password: null
+
+      }
     };
   },
   methods: {
@@ -151,10 +153,7 @@ export default {
       if (this.pass !== null) {
         (this.active = false),
           api
-            .post("registro", {
-              email: this.email,
-              pass: this.pass
-            })
+            .post("user_register", this.user)
             .then(response => {
               (this.cor = "success"),
                 (this.message = response.data.message),
