@@ -18,13 +18,13 @@
           link
           :to="{name: 'produto', params:{id: produto.id}}"
         >
-          <v-img max-height="50%" min-height="50%" :src="produto.imagem_produto[0].imagem"></v-img>
+          <v-img max-height="60%" min-height="60%" :src="produto.imagem_produto[0].imagem"></v-img>
           <v-card-title class="justify-center mb-n3 text-no-wrap">{{produto.nome}}</v-card-title>
           <v-card-text class="justify-center mb-n5">
             <v-row
               class="justify-center subtitle-1 text-truncate"
             >{{produto.produtor.pessoa[0].nome}}</v-row>
-            <v-row class="justify-center green--text subtitle-2">R$ {{produto.preco}}</v-row>
+            <v-row class="justify-center green--text body-1">R$ {{produto.preco}}</v-row>
           </v-card-text>
           <div class="categorias-color-bc mb-n4 mt-2">
             <v-list-item dense>

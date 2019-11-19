@@ -50,8 +50,9 @@
           <v-col cols="12">
             <v-container fluid>
               <div class="caption text-center font-weight-light mb-1">
-                Não encontrou o que procura ? Anuncie
-                <v-icon small>local_atm</v-icon>
+                <!-- Não encontrou o que procura ? Anuncie
+                <v-icon small>local_atm</v-icon>-->
+                <v-btn to="/perfil">Meus Produtos</v-btn>
               </div>
             </v-container>
           </v-col>
