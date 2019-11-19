@@ -75,6 +75,13 @@ export default {
   width: 100%;
   height: 36px;
 }
+.ativos-color-bc {
+  background-color: #009b36;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 36px;
+}
 .text-capitalize {
   text-transform: capitalize !important;
 }

@@ -4,6 +4,7 @@ import Index from './views/Index'
 import Registrar from './views/Registrar'
 import Entrar from './views/Entrar'
 import Anunciar from './views/Anunciar'
+import Perfil from './views/Perfil'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/anunciar',
     name: 'anunciar',
     component: Anunciar
+  },
+  {
+    path: '/perfil',
+    name: 'perfil',
+    component: Perfil
   }
 
 ]
