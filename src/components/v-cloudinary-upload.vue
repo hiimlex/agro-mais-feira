@@ -35,7 +35,7 @@
     <!-- Uploaded image -->
     <img
       v-if="imgPublicId"
-      width="400px"
+      width="300px"
       :src="imgSrc" />
     <!-- Delete button -->
     <v-row class="justify-center">
@@ -80,7 +80,7 @@ export default {
     // Image transformations
     transformation: {
       type: String,
-      default: 'w_120,h_120,c_fill,g_auto,q_auto,f_auto'
+      default: 'c_fill,h_500,q_100,w_500'
     },
     // Upload button color (default = gray)
     buttonColor: {
@@ -142,7 +142,7 @@ export default {
     // Full image src, with transformation
     imgSrc: {
       get: function () {
-        return `https://res.cloudinary.com/${this.cloudName}/image/upload/${this.imgPublicId}.${this.format}`
+        return `https://res.cloudinary.com/${this.cloudName}/image/upload/${this.transformation}/${this.imgPublicId}`
       },
       set: function (val) {
         return val

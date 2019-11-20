@@ -11,7 +11,7 @@ export const validaToken = {
         })
         .catch(error => {
           window.localStorage.removeItem('token')
-          this.$router.push('login')
+          this.$router.push('entrar')
         })
 
     }

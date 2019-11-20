@@ -13,37 +13,21 @@
             <v-divider></v-divider>
             <v-container>
               <v-subheader class="text-uppercase mt-n5 justify-center">Imagem do produto:</v-subheader>
-                <v-row class="justify-center">
-                        <vUploadCloud 
-            v-model="image"
-            upload-preset="tqunldff"
+              <v-row class="mt-n4" justify="center">
+                  <v-card flat tile>
+                                           <vUploadCloud 
+            v-model="produto.img"
+            upload-preset="hfljpegu"
             cloud-name="djwxazf5a"
           />
-                </v-row>
-              <!-- <v-row class="mt-n4" justify="center">
-                <v-col cols="4" sm="4" class="mt-n2 mb-2">
-                  <v-card flat tile>
-                    <v-img :src="img[0]" aspect-ratio="1"></v-img>
                   </v-card>
-                </v-col>
               </v-row>
-              <v-file-input
-                v-model="preview"
-                color="success"
-                accept="image/png, image/jpeg, image/bmp"
-                label="Foto do produto"
-                placeholder="Envie a foto do produto"
-                prepend-icon
-                prepend-inner-icon="mdi-paperclip"
-                small-chips
-                clearable
-              ></v-file-input>-->
               <v-divider></v-divider>
               <v-subheader class="text-uppercase justify-center">Informações do produto:</v-subheader>
               <v-text-field
                 filled
                 shaped
-                v-model="nome"
+                v-model="produto.title"
                 type="text"
                 label="Nome do produto"
                 color="success"
@@ -54,29 +38,29 @@
               ></v-text-field>
               <v-select
                 :items="items"
+                item-text="name"
+                item-value="id"
                 filled
                 shaped
-                v-model="categoria"
+                v-model="produto.id_category"
                 label="Categoria"
                 required
                 color="success"
                 item-color="success"
                 transition="slide-x-transition"
               ></v-select>
-              <v-text-field
-                filled
-                shaped
-                v-model="preco"
-                type="text"
-                label="Preço"
-                color="success"
-                hint="Digite o preço do produto."
-                required
-              ></v-text-field>
+              <div class="v-input theme--light v-text-field v-text-field--filled v-text-field--is-booted v-text-field--enclosed v-text-field--shaped">
+                <div class="v-input__control">
+                  <div class="v-input__slot">
+                    
+                    <money v-model="produto.price" v-bind="money"></money>
+                </div>
+                </div>
+              </div>
               <v-textarea
                 filled
                 shaped
-                v-model="descricao"
+                v-model="produto.desc"
                 type="text"
                 label="Descrição"
                 color="success"
@@ -86,10 +70,21 @@
                 maxlength="100"
                 no-resize
               ></v-textarea>
+              <v-text-field
+              filled
+              shaped
+              color="success"
+              v-model="produto.location"
+              type="text"
+              label="Localização na Feira"
+              hint="Informe sua localização na feira ou endereço caso serviço."
+              
+              >
+              </v-text-field>
               <v-divider></v-divider>
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="success" class="white--text">Anunciar</v-btn>
+                <v-btn color="success" class="white--text" @click.prevent="anunciar">Anunciar</v-btn>
               </v-card-actions>
             </v-container>
           </v-card>
@@ -100,27 +95,55 @@
 </template>
 
 <script>
+import { api } from "@/services";
 import vUploadCloud from '../components/v-cloudinary-upload'
-
+import {Money} from 'v-money'
 export default {
- components: { vUploadCloud },
-
+ components: { vUploadCloud, Money},
   data() {
     return {
       dialog: true,
-      nome: "",
-      image: null,
-      categoria: null,
-      items: ["Fruta", "sla"],
-      descricao: "",
-      preco: "",
+      items: null,
+      money: {
+        prefix: "R$ ",
+        decimal: ',',
+        thousands: '.',
+        precision: 2,
+        masked: false
+      },
+      produto: {
+        title: null,
+        price: '',
+        img: null,
+        desc: null,
+        location: null,
+        id_category: null
+      },
       n: 3
     };
 
   },
+  methods:{
+    anunciar(){
+      api.post('product', this.produto)
+      .then(response =>{
+        console.log(response)
+      })
+    }
+  },
+  async mounted() {
+    try {
+      let cat = await api.get("category");
+      let { data } = cat;
+      this.items = data.categories
+
+    } catch (e) {
+      console.log(e);
+    }
+  },
   watch:{
-    image: function(){
-      console.log(this.image)
+    produto: function(){
+      console.log(this.produto.price)
     }
   }
 };

@@ -27,7 +27,10 @@ const routes = [
   {
     path: '/anunciar',
     name: 'anunciar',
-    component: Anunciar
+    component: Anunciar,
+    meta: {
+      login: true
+    }
   },
   {
     path: '/perfil',
@@ -43,4 +46,15 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.login)) {
+    if (!window.localStorage.token){
+      next("/entrar");
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+})
 export default router

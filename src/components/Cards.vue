@@ -18,19 +18,15 @@
           link
           :to="{name: 'produto', params:{id: produto.id}}"
         >
-          <v-img max-height="60%" min-height="60%" :src="produto.imagem_produto[0].imagem"></v-img>
-          <v-card-title class="justify-center mb-n3 text-no-wrap">{{produto.nome}}</v-card-title>
+          <v-img max-height="60%" min-height="60%" :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"></v-img>
+          <v-card-title class="justify-center mb-n3 text-no-wrap">{{produto.title}}</v-card-title>
           <v-card-text class="justify-center mb-n5">
             <v-row
               class="justify-center subtitle-1 text-truncate"
-            >{{produto.produtor.pessoa[0].nome}}</v-row>
-            <v-row class="justify-center green--text body-1">R$ {{produto.preco}}</v-row>
+            >{{produto.user.name}}</v-row>
+            <v-row class="justify-center green--text body-1">R$ {{produto.price}}</v-row>
           </v-card-text>
-          <div class="categorias-color-bc mb-n4 mt-2">
-            <v-list-item dense>
-              <v-list-item-content class="justify-center white--text">Categoria</v-list-item-content>
-            </v-list-item>
-          </div>
+
         </v-card>
       </v-hover>
     </v-col>
@@ -62,7 +58,7 @@ export default {
       this.produtos = null;
       api.get(this.url).then(response => {
         if (response.data) {
-          this.produtos = response.data.produtos;
+          this.produtos = response.data.products;
         }
       });
     }
