@@ -1,9 +1,8 @@
 import Axios from 'axios'
 
 const axiosInstance = Axios.create({
-  baseURL: 'https://agromais-feira.herokuapp.com/'
+  baseURL: 'https://agromais-feira-api.herokuapp.com/'
 })
-
 
 axiosInstance.interceptors.request.use(
   function (config) {
@@ -33,13 +32,13 @@ export const api = {
   },
   login(body) {
     return Axios.post(
-      "https://agromaisteste.herokuapp.com/login",
+      "https://agromais-feira-api.herokuapp.com/login",
       body
     );
   },
   validaToken() {
     return axiosInstance.post(
-      "valida_token"
+      "verify_token"
     )
   }
 }

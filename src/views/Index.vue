@@ -42,7 +42,7 @@
               v-for="c in categorias"
               :key="c.id"
               @click="(filtraPorCategoria(c.id))"
-            >{{c.nome}}</v-tab>
+            >{{c.name}}</v-tab>
           </v-tabs>
         </v-card>
         <Cards />
@@ -85,9 +85,9 @@ export default {
   },
   async mounted() {
     try {
-      let cat = await api.get("categorias");
+      let cat = await api.get("category");
       let { data } = cat;
-      this.categorias = data.categorias;
+      this.categorias = data.categories;
     } catch (e) {
       console.log(e);
     }

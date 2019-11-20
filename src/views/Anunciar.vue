@@ -13,6 +13,13 @@
             <v-divider></v-divider>
             <v-container>
               <v-subheader class="text-uppercase mt-n5 justify-center">Imagem do produto:</v-subheader>
+                <v-row class="justify-center">
+                        <vUploadCloud 
+            v-model="image"
+            upload-preset="tqunldff"
+            cloud-name="djwxazf5a"
+          />
+                </v-row>
               <!-- <v-row class="mt-n4" justify="center">
                 <v-col cols="4" sm="4" class="mt-n2 mb-2">
                   <v-card flat tile>
@@ -93,17 +100,28 @@
 </template>
 
 <script>
+import vUploadCloud from '../components/v-cloudinary-upload'
+
 export default {
+ components: { vUploadCloud },
+
   data() {
     return {
       dialog: true,
       nome: "",
+      image: null,
       categoria: null,
       items: ["Fruta", "sla"],
       descricao: "",
       preco: "",
       n: 3
     };
+
+  },
+  watch:{
+    image: function(){
+      console.log(this.image)
+    }
   }
 };
 </script>

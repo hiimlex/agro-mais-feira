@@ -51,9 +51,9 @@ export default {
     url() {
       const query = serialize(this.$route.query);
       if (query) {
-        return `produtos${query}`;
+        return `product${query}`;
       } else {
-        return "/produtos";
+        return "/product";
       }
     }
   },

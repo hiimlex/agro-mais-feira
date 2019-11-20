@@ -39,13 +39,12 @@ export default new Vuex.Store({
     logarUsuario(context, payload) {
       return api
         .login({
-          email: payload.email,
-          pass: payload.pass
+          cpf: payload.cpf,
+          password: payload.pass
         })
         .then(response => {
           window.localStorage.token = `${response.data.token}`;
           context.commit("UPDATE_LOGIN", true);
-          this.dispatch('getPerfil')
         });
     },
     deslogar(context) {

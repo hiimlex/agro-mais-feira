@@ -29,9 +29,11 @@
                 v-model="user.cpf"
                 label="CPF"
                 required
+                :error="error"
                 mask="true"
                 v-mask="mask"
                 shaped
+                :error-messages="errorMsg"
                 hint="Este é o CPF que você irá utilizar para entrar na sua conta Agro+Feira"
               ></v-text-field>
               <v-text-field
@@ -88,13 +90,6 @@
             </v-container>
           </v-card>
         </v-form>
-        <!-- snackbar -->
-        <v-snackbar
-          v-model="snackbarHidden"
-          :color="cor"
-          class="white--text"
-          :timeout="timeout"
-        >{{ message }}</v-snackbar>
         <v-row justify="center">
           <v-dialog v-model="modal" persistent max-width="40%" scrollable>
             <v-card>
@@ -146,14 +141,10 @@ export default {
       mask1: "(##)#####-####",
       show: false,
       active: true,
-      cor: "success",
-      valid: true,
-      timeout: 6000,
-      snackbarHidden: false,
-      message: null,
       termos: false,
       status: false,
       modal: false,
+      error: false,
       passRules: [v => v >= 6 || "Sua senha deve possuir mais de 6 caracteres"],
       user: {
         name: null,
@@ -167,24 +158,18 @@ export default {
   methods: {
     createAccount() {
       if (this.pass !== null) {
-        (this.active = false),
           api
-            .post("user_register", this.user)
+            .post("user", this.user)
             .then(response => {
-              (this.cor = "success"),
-                (this.message = response.data.message),
-                (this.snackbarHidden = true);
-              this.status = true;
-              setTimeout(function() {
-                router.replace("/login");
-              }, 3000);
+              if(response.data.error){
+                this.error = true
+              }else{
+                this.error = false
+                setTimeout(function() {
+                router.replace("/entrar");
+              }, 1000);
+              }
             })
-            .catch(error => {
-              (this.cor = "error"),
-                (this.message = error.response.data.error),
-                (this.snackbarHidden = true),
-                (this.active = true);
-            });
       }
     },
     aceitarTermos() {
@@ -197,6 +182,11 @@ export default {
       this.modal = false;
       this.termos = false;
     }
+  },
+  computed:{
+    errorMsg () {
+        return this.error ? ['Já existe um registro associado a esse CPF'] : []
+      },
   }
 };
 </script>

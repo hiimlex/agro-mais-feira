@@ -1,7 +1,3 @@
-
-export function voltar(i) {
-  this.$router.go(i)
-}
 export function serialize(obj) {
   let queryString = "";
   for (let key in obj) {

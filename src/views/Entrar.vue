@@ -21,7 +21,7 @@
                 autocapitalize="none"
                 shaped
                 mask="true"
-                v-mask="'###. ###.###-##'"
+                v-mask="mask"
                 filled
                 hint="Insira seu CPF cadastrado na plataforma Agro+Feira."
               ></v-text-field>
@@ -50,6 +50,7 @@
                     block
                     rounded
                     large
+                    @click="logar"
                   >Entrar</v-btn>
                   <!-- @click.prevent="logar" -->
                 </v-col>
