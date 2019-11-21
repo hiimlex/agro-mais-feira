@@ -5,7 +5,7 @@
       transition="fade-transition"
       align-center
     >
-      <router-view transition="fade" />
+      <router-view/>
     </v-content>
   </v-app>
 </template>
@@ -13,7 +13,11 @@
 <script>
 export default {
   name: "App",
-
+  watch: {
+    $route(to) {
+      document.title = to.meta.title
+    }
+  }
 }
 </script>
 <style>

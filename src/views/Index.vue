@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     filtraPorCategoria(idCat) {
-      console.log(idCat);
+      this.$router.push({ query: { c: idCat } });
     },
     buscarProdutos() {
       this.$router.push({ query: { s: this.busca } });

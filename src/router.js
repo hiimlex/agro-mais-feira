@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from './views/Index'
-import Registrar from './views/Registrar'
-import Entrar from './views/Entrar'
-import Anunciar from './views/Anunciar'
-import Perfil from './views/Perfil'
+//import Registrar from './views/Registrar'
+//import Entrar from './views/Entrar'
+//import Anunciar from './views/Anunciar'
+//import Perfil from './views/Perfil'
 
 Vue.use(VueRouter)
 
@@ -12,30 +12,54 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: Index
+    component: Index,
+    meta: {
+      title: "Agro+Feira"
+    }
   },
   {
     path: '/registrar',
     name: 'registrar',
-    component: Registrar
+    component: () => import('./views/Registrar.vue'),
+    meta: {
+      title: "Criar Conta - Agro+Feira"
+    }
   },
   {
     path: '/entrar',
     name: 'entrar',
-    component: Entrar
+    component: () => import('./views/Entrar.vue'),
+    meta: {
+      title: "Entrar"
+    }
   },
   {
     path: '/anunciar',
     name: 'anunciar',
-    component: Anunciar,
+    component: () => import('./views/Anunciar.vue'),
     meta: {
+      title: "Anunciar produto ou serviço",
       login: true
     }
   },
   {
+    path: '/produto/:id',
+    name: 'produto',
+    component: () => import('./views/Produto.vue'),
+    meta: {
+      title: "Detalhes"
+    },
+    props: true
+
+  },
+  {
     path: '/perfil',
     name: 'perfil',
-    component: Perfil
+    component: () => import('./views/Perfil.vue'),
+    meta: {
+      title: "Meu Perfil",
+      login: true
+    }
   }
 
 ]

@@ -140,11 +140,6 @@ export default {
     } catch (e) {
       console.log(e);
     }
-  },
-  watch:{
-    produto: function(){
-      console.log(this.produto.price)
-    }
   }
 };
 </script>

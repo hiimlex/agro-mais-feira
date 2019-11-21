@@ -1,5 +1,23 @@
 <template>
+<v-content>
+   
+            <v-snackbar
+      color="red darken-3"
+      
+      v-model="snackbar"
+      :timeout="timeout"
+      :top="y === 'top'"
+      :right="x === 'right'"
+      :multi-line="true"
+
+    >
+        {{message}}
+
+      
+      <v-btn dark text @click.native="snackbar = false">X</v-btn>
+    </v-snackbar>
   <v-row class="my-auto" v-if="produtos">
+    
     <v-col
       cols="6"
       xs="6"
@@ -11,8 +29,12 @@
       v-for="produto in produtos"
       :key="produto.id"
     >
+
       <v-hover v-slot:default="{ hover }">
+
+    
         <v-card
+       
           class="mx-auto justify-content-center pb-6"
           :elevation="hover ? 12 : 4"
           link
@@ -31,6 +53,8 @@
       </v-hover>
     </v-col>
   </v-row>
+ 
+  </v-content>
 </template>
 
 <script>
@@ -40,7 +64,13 @@ export default {
   data() {
     return {
       produtos: null,
-      busca: null
+      busca: null,
+      snackbar: false,
+      timeout: 6000,
+      message: null,
+      y: 'top',
+      x: 'right'
+
     };
   },
   computed: {
@@ -55,12 +85,17 @@ export default {
   },
   methods: {
     getProdutos() {
-      this.produtos = null;
+      this.produtos = '';
+      this.snackbar = false
       api.get(this.url).then(response => {
         if (response.data) {
           this.produtos = response.data.products;
         }
-      });
+      }).catch(e=>{
+        this.snackbar = true
+        console.log("sd")
+        this.message = "Desculpe, não localizamos nenhum produto para esta categoria!"
+      })
     }
   },
   watch: {
