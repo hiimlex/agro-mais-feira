@@ -31,29 +31,23 @@
                       :elevation="hover ? 12 : 4"
                       v-for="ativo in ativos"
                       :key="ativo.id"
-                      height="300px "
+                      height="350px"
+                      link
                     >
-                      <v-img max-height="50%" min-height="50%" :src="ativo.foto">
+                      <v-img max-height="65%" min-height="65%" :src="ativo.foto">
                         <div>
-                          <v-btn tile class="float-right">
-                            <v-icon>edit</v-icon>
-                          </v-btn>
+                          <v-card tile flat class="float-right">
+                            <v-icon size="32">edit</v-icon>
+                          </v-card>
                         </div>
                       </v-img>
-                      <v-card-title class="justify-center mb-n5 text-no-wrap">{{ativo.nome}}</v-card-title>
+                      <v-card-title
+                        class="headline justify-center mb-n5 text-no-wrap"
+                      >{{ativo.nome}}</v-card-title>
                       <v-card-title
                         class="justify-center mb-n5 title text-no-wrap success--text font-weight-regular"
                       >R$ {{ativo.preco}}</v-card-title>
-                      <div class="hidden-md-and-up">
-                        <br />
-                        <br />
-                        <br />
-                      </div>
-                      <div class="ativos-color-bc">
-                        <v-list-item dense>
-                          <v-list-item-content class="justify-center white--text">Categoria</v-list-item-content>
-                        </v-list-item>
-                      </div>
+                      <div class="hidden-md-and-up"></div>
                     </v-card>
                   </v-hover>
                 </v-col>

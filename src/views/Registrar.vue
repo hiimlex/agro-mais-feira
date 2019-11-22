@@ -91,7 +91,7 @@
           </v-card>
         </v-form>
         <v-row justify="center">
-          <v-dialog v-model="modal" persistent max-width="40%" scrollable>
+          <v-dialog v-model="modal" persistent scrollable>
             <v-card>
               <v-card-title class="headline">Termos de usuário</v-card-title>
               <v-card-text class="text-justify">
