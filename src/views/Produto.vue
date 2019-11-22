@@ -1,85 +1,140 @@
 <template>
-  <v-container class="my-auto" fluid>
-    <div class="hidden-md-and-up">
-      <v-row justify="center">
-        <v-dialog
-          v-if="produto"
-          fullscreen
-          light
-          v-model="dialog"
-          hide-overlay
-          transition="dialog-botton-transition"
-        >
-          <v-card class="grey lighten-3">
-            <v-toolbar color="success" flat>
-              <v-btn icon text @click="voltar">
-                <v-icon size="28" color="white">arrow_back</v-icon>
-              </v-btn>
-              <v-toolbar-title class="white--text ml-n5 font-weight-bold title">
-                <span>Detalhes</span>
-              </v-toolbar-title>
-              <div class="flex-grow-1"></div>
-            </v-toolbar>
-            <v-tabs
-              grow
-              color="white"
-              dark
-              class="mt-n2"
-              background-color="success"
-              center-active
-              centered
-            >
-              <v-tab href="#produto">Produto</v-tab>
-              <v-tab href="#descricao">Descrição</v-tab>
-              <v-tab-item id="produto">
-                <v-card flat color="white">
-                 <v-img max-height="60%" min-height="60%" :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"></v-img>
-
-                  <v-container class="grey lighten-4">
+  <v-row justify="center">
+    <v-dialog
+      v-if="produto"
+      fullscreen
+      light
+      v-model="dialog"
+      hide-overlay
+      transition="dialog-botton-transition"
+    >
+      <v-card class="grey lighten-2">
+        <v-toolbar color="success" dark>
+          <v-btn icon text @click="voltar">
+            <v-icon size="28" color="white">arrow_back</v-icon>
+          </v-btn>
+          <v-toolbar-title class="white--text ml-n5 font-weight-bold title">
+            <span>Detalhes</span>
+          </v-toolbar-title>
+          <div class="flex-grow-1"></div>
+        </v-toolbar>
+        <div class="hidden-sm-and-down mt-8">
+          <v-container>
+            <v-card flat>
+              <v-row class="align-center justify-center">
+                <v-col md="5" xl="5">
+                  <div class="pa-8">
+                    <v-img
+                      aspect-ratio="1.7"
+                      height="350"
+                      width="350"
+                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
+                    ></v-img>
+                  </div>
+                </v-col>
+                <v-divider vertical></v-divider>
+                <v-col md="6" xl="6">
+                  <v-container class="pa-8">
                     <div
-                      class="headline text-capitalize grey--text text--darken-3 font-weight-light text-justify"
+                      class="display-1 text-capitalize font-weight-bold text-justify"
                     >{{produto.title}}</div>
                     <!-- Colocar depois as children -->
-                    <div class="caption grey--text text--darken-3 text-justify font-weight-light">
+                    <div class="subtitle-1 text-justify font-weight-medium">
                       por
-                      <router-link
-                        :to="'perfil/publico'"
-                        class="remove-text-underline grey--text font-weight-medium"
-                      >
-                        <span>{{produto.user.name}}</span>
-                      </router-link>
+                      <span>{{produto.user.name}}</span>
                     </div>
                     <div
-                      class="display-1 text-justify grey--text text--darken-3 font-weight-light"
+                      class="display-1 text-justify font-weight-light text-justify mb-2"
                     >R$ {{produto.price}}</div>
                   </v-container>
-                </v-card>
-              </v-tab-item>
-              <v-tab-item id="descricao">
-                <v-container class="grey lighten-4 my-auto">
-                  <div class="body-1 font-weight-light mb-3 grey--text text--darken-3">
-                    <span class="text-uppercase font-weight-medium">Categoria:</span>
-                    {{produto.category.name}}
-                  </div>
-                  <div class="body-1 font-weight-light mb-3 grey--text text--darken-3">
-                    <span class="text-uppercase font-weight-medium">Localização na feira ou serviço:</span>
-                    {{produto.location}}
-                  </div>
-                  <div class="body-1 font-weight-light mb-3 grey--text text--darken-3">
-                    <span class="text-uppercase font-weight-medium">Descrição:</span>
-                  </div>
-                  <div
-                    class="body-1 font-weight-light text-justify grey--text text--darken-3"
-                  >{{produto.desc}}</div>
-                </v-container>
-              </v-tab-item>
-            </v-tabs>
+                  <v-divider inset></v-divider>
+                  <v-container>
+                    <div class="text-center title font-weight-medium mt-2">
+                      <b>Informações Adicionais:</b>
+                    </div>
+                    <div class="title font-weight-light mb-2">
+                      <v-icon left class="mt-n1">local_offer</v-icon>
+                      <b>Categoria:</b>
+                      {{produto.category.name}}
+                    </div>
+                    <div class="title font-weight-light mb-2 text-justify">
+                      <v-icon left class="mt-n1">room</v-icon>
+                      <b>Localização:</b>
+                      {{produto.location}}
+                    </div>
+                    <div class="title font-weight-light mb-2 text-justify">
+                      <v-icon left class="mt-n1">phone</v-icon>
+                      <b>Contato:</b>
+                      {{produto.user.phone}}
+                    </div>
+                    <div class="title font-weight-light mb-2 text-justify">
+                      <v-icon left class="mt-n1">info</v-icon>
+                      <b>Descrição:</b>
+                      {{produto.desc}}
+                    </div>
+                  </v-container>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-container>
+        </div>
+        <div class="hidden-md-and-up">
+          <div>
+            <v-img
+              :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
+            ></v-img>
+          </div>
+          <v-card flat class="grey lighten-2">
+            <v-container class="grey lighten-2">
+              <div
+                class="headline text-capitalize font-weight-medium text-justify"
+              >{{produto.title}}</div>
+              <!-- Colocar depois as children -->
+              <div class="subtitle-1 text-justify font-weight-medium">
+                por
+                <span>{{produto.user.name}}</span>
+              </div>
+              <div
+                class="display-1 text-justify font-weight-light text-justify mb-2"
+              >R$ {{produto.price}}</div>
+            </v-container>
           </v-card>
-        </v-dialog>
-        <loading v-else />
-      </v-row>
-    </div>
-  </v-container>
+        </div>
+        <div class="hidden-md-and-up">
+          <v-divider></v-divider>
+          <v-card class="grey lighten-2" flat>
+            <v-container>
+              <div class="text-center title font-weight-medium mt-2">
+                <b>Informações Adicionais:</b>
+              </div>
+
+              <div class="title font-weight-light mb-2">
+                <v-icon left class="mt-n1">local_offer</v-icon>
+                <b>Categoria:</b>
+                {{produto.category.name}}
+              </div>
+              <div class="title font-weight-light mb-2 text-justify">
+                <v-icon left class="mt-n1">room</v-icon>
+                <b>Localização:</b>
+                {{produto.location}}
+              </div>
+              <div class="title font-weight-light mb-2 text-justify">
+                <v-icon left class="mt-n1">phone</v-icon>
+                <b>Contato:</b>
+                {{produto.user.phone}}
+              </div>
+              <div class="title font-weight-light mb-2 text-justify">
+                <v-icon left class="mt-n1">info</v-icon>
+                <b>Descrição:</b>
+                {{produto.desc}}
+              </div>
+            </v-container>
+          </v-card>
+        </div>
+      </v-card>
+    </v-dialog>
+    <!-- <loading v-else /> -->
+  </v-row>
 </template>
 
 <script>
@@ -96,15 +151,18 @@ export default {
     };
   },
   methods: {
-    voltar(){
-      this.$router.go(-1)
+    voltar() {
+      this.$router.go(-1);
     },
     exibeProduto() {
-      api.get(`product/${this.id}`).then(response => {
-        this.produto = response.data.product;
-      }).catch(e =>{
-        this.$router.push("/")
-      })
+      api
+        .get(`product/${this.id}`)
+        .then(response => {
+          this.produto = response.data.product;
+        })
+        .catch(e => {
+          this.$router.push("/");
+        });
     }
   },
   created() {

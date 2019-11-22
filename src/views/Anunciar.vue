@@ -14,13 +14,13 @@
             <v-container>
               <v-subheader class="text-uppercase mt-n5 justify-center">Imagem do produto:</v-subheader>
               <v-row class="mt-n4" justify="center">
-                  <v-card flat tile>
-                                           <vUploadCloud 
-            v-model="produto.img"
-            upload-preset="hfljpegu"
-            cloud-name="djwxazf5a"
-          />
-                  </v-card>
+                <v-card flat tile>
+                  <vUploadCloud
+                    v-model="produto.img"
+                    upload-preset="hfljpegu"
+                    cloud-name="djwxazf5a"
+                  />
+                </v-card>
               </v-row>
               <v-divider></v-divider>
               <v-subheader class="text-uppercase justify-center">Informações do produto:</v-subheader>
@@ -34,7 +34,7 @@
                 hint="Digite o nome do produto."
                 required
                 counter
-                maxlength="20"
+                maxlength="12"
               ></v-text-field>
               <v-select
                 :items="items"
@@ -49,12 +49,13 @@
                 item-color="success"
                 transition="slide-x-transition"
               ></v-select>
-              <div class="v-input theme--light v-text-field v-text-field--filled v-text-field--is-booted v-text-field--enclosed v-text-field--shaped">
+              <div
+                class="v-input theme--light v-text-field v-text-field--filled v-text-field--is-booted v-text-field--enclosed v-text-field--shaped"
+              >
                 <div class="v-input__control">
                   <div class="v-input__slot">
-                    
                     <money v-model="produto.price" v-bind="money"></money>
-                </div>
+                  </div>
                 </div>
               </div>
               <v-textarea
@@ -71,16 +72,14 @@
                 no-resize
               ></v-textarea>
               <v-text-field
-              filled
-              shaped
-              color="success"
-              v-model="produto.location"
-              type="text"
-              label="Localização na Feira"
-              hint="Informe sua localização na feira ou endereço caso serviço."
-              
-              >
-              </v-text-field>
+                filled
+                shaped
+                color="success"
+                v-model="produto.location"
+                type="text"
+                label="Localização na Feira"
+                hint="Informe sua localização na feira ou endereço caso serviço."
+              ></v-text-field>
               <v-divider></v-divider>
               <v-card-actions>
                 <div class="flex-grow-1"></div>
@@ -96,24 +95,24 @@
 
 <script>
 import { api } from "@/services";
-import vUploadCloud from '../components/v-cloudinary-upload'
-import {Money} from 'v-money'
+import vUploadCloud from "../components/v-cloudinary-upload";
+import { Money } from "v-money";
 export default {
- components: { vUploadCloud, Money},
+  components: { vUploadCloud, Money },
   data() {
     return {
       dialog: true,
       items: null,
       money: {
         prefix: "R$ ",
-        decimal: ',',
-        thousands: '.',
+        decimal: ",",
+        thousands: ".",
         precision: 2,
         masked: false
       },
       produto: {
         title: null,
-        price: '',
+        price: "",
         img: null,
         desc: null,
         location: null,
@@ -121,22 +120,19 @@ export default {
       },
       n: 3
     };
-
   },
-  methods:{
-    anunciar(){
-      api.post('product', this.produto)
-      .then(response =>{
-        console.log(response)
-      })
+  methods: {
+    anunciar() {
+      api.post("product", this.produto).then(response => {
+        console.log(response);
+      });
     }
   },
   async mounted() {
     try {
       let cat = await api.get("category");
       let { data } = cat;
-      this.items = data.categories
-
+      this.items = data.categories;
     } catch (e) {
       console.log(e);
     }

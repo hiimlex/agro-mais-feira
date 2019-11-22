@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div id="Navbar" class="my-auto">
     <!-- Desktop and mobile -->
     <v-app-bar elevation="2">

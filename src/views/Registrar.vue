@@ -138,7 +138,7 @@ export default {
   data() {
     return {
       mask: "###.###.###-##",
-      mask1: "(##)#####-####",
+      mask1: "(##) #####-####",
       show: false,
       active: true,
       termos: false,
@@ -151,25 +151,22 @@ export default {
         cpf: null,
         phone: null,
         password: null
-
       }
     };
   },
   methods: {
     createAccount() {
       if (this.pass !== null) {
-          api
-            .post("user", this.user)
-            .then(response => {
-              if(response.data.error){
-                this.error = true
-              }else{
-                this.error = false
-                setTimeout(function() {
-                router.replace("/entrar");
-              }, 1000);
-              }
-            })
+        api.post("user", this.user).then(response => {
+          if (response.data.error) {
+            this.error = true;
+          } else {
+            this.error = false;
+            setTimeout(function() {
+              router.replace("/entrar");
+            }, 1000);
+          }
+        });
       }
     },
     aceitarTermos() {
@@ -183,10 +180,10 @@ export default {
       this.termos = false;
     }
   },
-  computed:{
-    errorMsg () {
-        return this.error ? ['Já existe um registro associado a esse CPF'] : []
-      },
+  computed: {
+    errorMsg() {
+      return this.error ? ["Já existe um registro associado a esse CPF"] : [];
+    }
   }
 };
 </script>
