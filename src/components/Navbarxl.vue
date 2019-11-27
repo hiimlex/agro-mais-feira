@@ -13,7 +13,7 @@
       </v-btn>
       <router-link to="/" class="router-bar">
         <div class="text-center">
-          <v-toolbar-title class="logo ml-3">Agro+Feira</v-toolbar-title>
+          <v-toolbar-title class="logo ml-3">+Feira</v-toolbar-title>
         </div>
       </router-link>
       <div class="flex-grow-1"></div>
@@ -51,7 +51,7 @@
     <!-- Sidebar -->
     <v-navigation-drawer v-model="drawer" app temporary>
       <div class="text-center">
-        <v-list-item-title class="logo">Agro+</v-list-item-title>
+        <v-list-item-title class="logo">Feira</v-list-item-title>
       </div>
       <v-divider></v-divider>
       <!-- Links -->

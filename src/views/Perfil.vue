@@ -8,9 +8,18 @@
           </v-btn>
           <v-toolbar-title>Meus Produtos</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn icon dark>
-            <v-icon>menu</v-icon>
-          </v-btn>
+          <v-menu transition="fade-transition">
+            <template v-slot:activator="{ on }">
+              <v-btn icon text dark class="mr-n3">
+                <v-icon v-on="on">more_vert</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item>
+                <v-list-item-title>SAIR</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </v-toolbar>
         <v-tabs
           grow
