@@ -9,7 +9,8 @@ const routes = [
     name: 'index',
     component: () => import('./views/Index.vue'),
     meta: {
-      title: "Feira de animais"
+      title: "Feira de animais",
+      lucas: "DEVELOPER"
     }
   },
   {

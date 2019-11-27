@@ -13,7 +13,7 @@
       </v-btn>
       <router-link to="/" class="router-bar">
         <div class="text-center">
-          <v-toolbar-title class="logo ml-3">+Feira</v-toolbar-title>
+          <v-toolbar-title class="logo ml-3">{{$store.state.titlelogo}}</v-toolbar-title>
         </div>
       </router-link>
       <div class="flex-grow-1"></div>
@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       drawer: null,
+      title: null,
       links: [
         { icon: "home", name: "Home", route: "/" },
         { icon: "person", name: "Entrar", route: "entrar" },
@@ -85,6 +86,7 @@ export default {
       busca: null
     };
   },
+
   methods: {
     buscarProdutos() {
       this.$router.push({ query: { s: this.busca } });

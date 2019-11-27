@@ -22,6 +22,7 @@
       accept="image/*"
       :multiple="false"
       @change="uploadFiles($event)" />
+      
     <!-- Progress -->
     <v-progress-circular
       v-if="uploading"
@@ -161,6 +162,12 @@ export default {
     // Upload the image
     uploadFiles (e) {
       let files = e.target.files || e.dataTransfer.files
+      console.log("oi")
+      if (files[0].size > 10485760) {
+        alert("A imagem excede o tamanho máximo de 10 MB")
+        
+        return 
+      }
       if (files.length) {
         this.uploading = true
         for (let i = 0; i < files.length; i++) {

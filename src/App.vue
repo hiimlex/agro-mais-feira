@@ -15,7 +15,7 @@
 export default {
   name: "App",
   watch: {
-    $route(to) {
+    $route(to, from) {
       document.title = to.meta.title;
     }
   }

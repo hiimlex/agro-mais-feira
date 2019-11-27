@@ -37,7 +37,7 @@ export const api = {
     );
   },
   validaToken() {
-    return axiosInstance.post(
+    return axiosInstance.get(
       "verify_token"
     )
   }

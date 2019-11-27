@@ -71,15 +71,6 @@
                 maxlength="100"
                 no-resize
               ></v-textarea>
-              <v-text-field
-                filled
-                shaped
-                color="success"
-                v-model="produto.location"
-                type="text"
-                label="Localização na Feira"
-                hint="Informe sua localização na feira ou endereço caso serviço."
-              ></v-text-field>
               <v-divider></v-divider>
               <v-card-actions>
                 <div class="flex-grow-1"></div>
@@ -101,8 +92,7 @@ import { validaToken } from "../mixins"
 
 export default {
   components: { vUploadCloud, Money },
-    mixins: [validaToken],
-
+  mixins: [validaToken],
   data() {
     return {
       dialog: true,
@@ -119,7 +109,6 @@ export default {
         price: "",
         img: null,
         desc: null,
-        location: null,
         id_category: null
       },
       n: 3

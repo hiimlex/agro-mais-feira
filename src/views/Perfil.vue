@@ -4,7 +4,7 @@
       <v-card class="grey lighten-3">
         <v-toolbar color="success" class="white--text" flat tile>
           <v-btn icon dark to="/">
-            <v-icon>mdi-close</v-icon>
+            <v-icon>close</v-icon>
           </v-btn>
           <v-toolbar-title>Meus Produtos</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -15,8 +15,8 @@
               </v-btn>
             </template>
             <v-list>
-              <v-list-item>
-                <v-list-item-title>SAIR</v-list-item-title>
+              <v-list-item @click="deslogar">
+                <v-list-item-title >Sair</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -174,6 +174,7 @@ export default {
     return {
       dialog: true,
       modal: false,
+      hover: null,
       ativos: [
         {
           foto: require("../assets/uva.jpeg"),
@@ -200,6 +201,13 @@ export default {
       ]
     };
   },
-  components: { Cards }
+  components: { Cards },
+  methods: {
+    deslogar(){
+        this.$store.dispatch("deslogar").then(response => {
+        this.$router.push("/");
+      });
+      }
+  }
 };
 </script>
