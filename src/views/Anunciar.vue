@@ -97,8 +97,12 @@
 import { api } from "@/services";
 import vUploadCloud from "../components/v-cloudinary-upload";
 import { Money } from "v-money";
+import { validaToken } from "../mixins"
+
 export default {
   components: { vUploadCloud, Money },
+    mixins: [validaToken],
+
   data() {
     return {
       dialog: true,

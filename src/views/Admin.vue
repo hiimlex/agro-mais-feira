@@ -106,8 +106,11 @@
 
 <script>
 import Cards from "../components/Cards";
+import { validaToken } from "../mixins"
 
 export default {
+  mixins: [validaToken],
+
   data() {
     return {
       dialog: true,

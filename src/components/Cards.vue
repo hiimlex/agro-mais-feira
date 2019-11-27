@@ -43,6 +43,7 @@
         </v-hover>
       </v-col>
     </v-row>
+    <loading v-else />
   </v-content>
 </template>
 
