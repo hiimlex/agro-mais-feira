@@ -34,8 +34,8 @@
               min-height="60%"
               :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
             ></v-img>
-            <v-card-title class="text-truncate justify-center mb-n3">{{produto.title}}</v-card-title>
-            <v-card-text class="justify-center mb-n5">
+            <v-card-text class="justify-center mt-n4">
+              <v-card-title class="text-truncate justify-center">{{produto.title}}</v-card-title>
               <v-row class="justify-center subtitle-1 text-truncate">{{produto.user.name}}</v-row>
               <v-row class="justify-center green--text body-1">R$ {{produto.price}}</v-row>
             </v-card-text>

@@ -81,11 +81,12 @@
         <div class="hidden-md-and-up">
           <div>
             <v-img
+              height="300"
               :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
             ></v-img>
           </div>
-          <v-card flat class="grey lighten-2">
-            <v-container class="grey lighten-2">
+          <v-card flat class="white">
+            <v-container>
               <div
                 class="headline text-capitalize font-weight-medium text-justify"
               >{{produto.title}}</div>
@@ -102,7 +103,7 @@
         </div>
         <div class="hidden-md-and-up">
           <v-divider></v-divider>
-          <v-card class="grey lighten-2" flat>
+          <v-card class="white" flat>
             <v-container>
               <div class="text-center title font-weight-medium mt-2">
                 <b>Informações Adicionais:</b>

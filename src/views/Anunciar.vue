@@ -12,9 +12,9 @@
             </v-card-title>
             <v-divider></v-divider>
             <v-container>
-              <v-subheader class="text-uppercase mt-n5 justify-center">Imagem do produto:</v-subheader>
+              <v-subheader class="text-uppercase mt-n5 mb-2 justify-center">Imagem do produto:</v-subheader>
               <v-row class="mt-n4" justify="center">
-                <v-card flat tile>
+                <v-card flat tile class="mb-3">
                   <vUploadCloud
                     v-model="produto.img"
                     upload-preset="hfljpegu"

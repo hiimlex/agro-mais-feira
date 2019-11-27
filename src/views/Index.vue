@@ -2,10 +2,6 @@
   <div>
     <Navbarxl />
     <v-container class="my-auto">
-      <!-- <v-alert v-if="perfil_inc" class="white--text" color="success" icon="person" dismissible prominent dense >
-      {{p_incomplete}}
-      </v-alert>-->
-      <!-- Categorias mobile -->
       <div>
         <div class="hidden-sm-and-up">
           <v-text-field
@@ -37,6 +33,7 @@
             grow
             show-arrows
             elevation="2"
+            disabled
           >
             <v-tab
               v-for="c in categorias"
@@ -53,6 +50,7 @@
                 <!-- Não encontrou o que procura ? Anuncie
                 <v-icon small>local_atm</v-icon>-->
                 <v-btn to="/perfil">Meus Produtos</v-btn>
+                <v-btn to="/admin">Admin</v-btn>
               </div>
             </v-container>
           </v-col>
@@ -77,7 +75,9 @@ export default {
   },
   methods: {
     filtraPorCategoria(idCat) {
-      this.$router.push({ query: { c: idCat } });
+      if (idCat !== 0) {
+        this.$router.push({ query: { c: idCat } });
+      }
     },
     buscarProdutos() {
       this.$router.push({ query: { s: this.busca } });
@@ -88,6 +88,7 @@ export default {
       let cat = await api.get("category");
       let { data } = cat;
       this.categorias = data.categories;
+      this.categorias.unshift({ id: 0, name: "Geral" });
     } catch (e) {
       console.log(e);
     }

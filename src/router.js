@@ -1,10 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from './views/Index'
-//import Registrar from './views/Registrar'
-//import Entrar from './views/Entrar'
-//import Anunciar from './views/Anunciar'
-//import Perfil from './views/Perfil'
 
 Vue.use(VueRouter)
 
@@ -12,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: Index,
+    component: () => import('./views/Index.vue'),
     meta: {
       title: "Agro+Feira"
     }
@@ -60,7 +55,17 @@ const routes = [
       title: "Meu Perfil",
       login: true
     }
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('./views/Admin.vue'),
+    meta: {
+      title: "Administrador",
+      login: true
+    }
   }
+
 
 ]
 
@@ -72,7 +77,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.login)) {
-    if (!window.localStorage.token){
+    if (!window.localStorage.token) {
       next("/entrar");
     } else {
       next();
