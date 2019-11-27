@@ -9,7 +9,7 @@ const routes = [
     name: 'index',
     component: () => import('./views/Index.vue'),
     meta: {
-      title: "Agro+Feira"
+      title: "Feira de animais"
     }
   },
   {
@@ -17,7 +17,7 @@ const routes = [
     name: 'registrar',
     component: () => import('./views/Registrar.vue'),
     meta: {
-      title: "Criar Conta - Agro+Feira"
+      title: "Criar Conta"
     }
   },
   {

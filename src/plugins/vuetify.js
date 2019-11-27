@@ -11,7 +11,7 @@ export default new Vuetify({
     theme: {
         themes: {
             light: {
-                success: '#009B36'
+                success: '#68B6D1'
             }
         }
 
