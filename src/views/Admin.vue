@@ -112,6 +112,7 @@ export default {
     return {
       dialog: true,
       modal: false,
+      hover: 2,
       ativos: [
         {
           foto: require("../assets/uva.jpeg"),

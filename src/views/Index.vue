@@ -77,6 +77,8 @@ export default {
     filtraPorCategoria(idCat) {
       if (idCat !== 0) {
         this.$router.push({ query: { c: idCat } });
+      } else {
+        this.$router.push({ path: "/" });
       }
     },
     buscarProdutos() {
