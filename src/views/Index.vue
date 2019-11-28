@@ -5,7 +5,6 @@
       <div>
         <div class="hidden-sm-and-up">
           <v-text-field
-            autofocus
             placeholder="Buscar"
             color="success"
             clearable

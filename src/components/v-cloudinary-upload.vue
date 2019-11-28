@@ -1,5 +1,7 @@
 <template>
-  <div>
+      <v-content>
+        
+     
     <!-- upload button -->
     <v-btn 
       @click.native="selectFiles" 
@@ -53,7 +55,7 @@
       </v-btn>
     </div>
     </v-row>
-  </div>
+ </v-content>
 </template>
 
 <script>
@@ -224,8 +226,7 @@ export default {
   /* visually hides the input file */
 
   input[type="file"] {
-    position: absolute;
-    clip: rect(0,0,0,0);
+    display: none;
   }
 
 </style>

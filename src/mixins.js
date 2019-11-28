@@ -2,13 +2,18 @@ import { api } from '@/services'
 
 //valida token, mixin created
 export const validaToken = {
-  beforeUpdate() {
+  created() {
     if (window.localStorage.token) {
       api
         .validaToken()
         .catch(error => {
           window.localStorage.removeItem('token')
-          this.$router.push('entrar')
+          console.log(this.$route)
+          if(this.$route.path == '/'){
+            this.$router.replace('/')
+          }else{
+            this.$router.push('entrar')
+          }
         })
 
     }

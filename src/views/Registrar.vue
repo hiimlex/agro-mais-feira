@@ -2,7 +2,7 @@
   <v-container class="my-auto mt-8">
     <v-row justify="center" align="center">
       <v-col cols="12" sm="10" lg="5" xl="5">
-        <v-form>
+        <v-form v-if="registrando">
           <v-card class="mx-auto">
             <router-link to="/" class="router-bar">
               <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
@@ -27,6 +27,7 @@
                 filled
                 color="success"
                 v-model="user.cpf"
+                type="tel"
                 label="CPF"
                 required
                 :error="error"
@@ -41,11 +42,19 @@
                 color="success"
                 v-model="user.phone"
                 required
+                type="tel"
                 label="Contato ou Whatsapp"
                 mask="true"
                 v-mask="mask1"
                 shaped
                 hint="Este é o seu Número que será utilizado como Contato"
+              ></v-text-field>
+               <v-text-field
+                filled
+                shaped
+                color="success"
+                label="Localização"
+                hint="Localização na feira ou serviço (Opcional)"
               ></v-text-field>
               <v-text-field
                 :append-icon="show ? 'visibility' : 'visibility_off'"
@@ -90,6 +99,17 @@
             </v-container>
           </v-card>
         </v-form>
+          <v-card class="mx-auto" v-if="notificacao">
+                      <router-link to="/" class="router-bar">
+              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+            </router-link>
+            <v-container >
+                <v-alert type="success" prominent  color="green dark-3" dark >
+           Conta criada com sucesso, procure a administração da feira para mais informações.
+          </v-alert>
+            </v-container>
+        
+        </v-card>
         <v-row justify="center">
           <v-dialog v-model="modal" persistent scrollable>
             <v-card>
@@ -125,6 +145,7 @@
           </v-dialog>
         </v-row>
       </v-col>
+    
     </v-row>
   </v-container>
 </template>
@@ -145,6 +166,8 @@ export default {
       status: false,
       modal: false,
       error: false,
+      notificacao: false,
+      registrando: true,
       passRules: [v => v >= 6 || "Sua senha deve possuir mais de 6 caracteres"],
       user: {
         name: null,
@@ -158,15 +181,18 @@ export default {
     createAccount() {
       if (this.pass !== null) {
         api.post("user", this.user).then(response => {
-          if (response.data.error) {
-            this.error = true;
-          } else {
-            this.error = false;
-            setTimeout(function() {
+
+            this.error = false
+            this.notificacao = true
+            this.registrando = false
+            setTimeout(() => this.$router.push("/entrar"),3000)
+        /*    setTimeout(function() {
               router.replace("/entrar");
             }, 1000);
-          }
-        });
+          }*/
+        }).catch(()=>{
+          this.error = true;
+        })
       }
     },
     aceitarTermos() {

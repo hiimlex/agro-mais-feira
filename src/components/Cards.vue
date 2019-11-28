@@ -60,6 +60,22 @@ export default {
       y: "top"
     };
   },
+    beforeUpdate() {
+    if (window.localStorage.token) {
+      api
+        .validaToken()
+        .catch(error => {
+          window.localStorage.removeItem('token')
+          console.log(this.$route)
+          if(this.$route.path == '/'){
+            this.$router.replace('/')
+          }else{
+            this.$router.push('entrar')
+          }
+        })
+
+    }
+  },
   computed: {
     url() {
       const query = serialize(this.$route.query);
@@ -83,7 +99,6 @@ export default {
         })
         .catch(e => {
           this.snackbar = true;
-          console.log("sd");
           this.message =
             "Desculpe, não localizamos nenhum produto para esta categoria!";
         });

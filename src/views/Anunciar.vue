@@ -1,8 +1,10 @@
 <template>
+  
+
   <v-container fluid class="my-auto mt-12">
     <v-row justify="center" align="center">
       <v-col cols="12" sm="10" lg="6" xl="6">
-        <v-form>
+        <v-form v-if="anunciando">
           <v-card class="mx-auto">
             <router-link to="/" class="router-bar">
               <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
@@ -79,9 +81,22 @@
             </v-container>
           </v-card>
         </v-form>
+        <v-card class="mx-auto" v-if="notificacao">
+                      <router-link to="/" class="router-bar">
+              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+            </router-link>
+            <v-container >
+                <v-alert type="success" prominent  color="green dark-3" dark >
+            Seu produto foi cadastrado com sucesso, aguarde aprovação da administração da feira.
+          </v-alert>
+            </v-container>
+        
+        </v-card>
       </v-col>
+
     </v-row>
   </v-container>
+
 </template>
 
 <script>
@@ -95,8 +110,10 @@ export default {
   mixins: [validaToken],
   data() {
     return {
+      anunciando: true,
       dialog: true,
       items: null,
+      notificacao:false,
       money: {
         prefix: "R$ ",
         decimal: ",",
@@ -115,9 +132,15 @@ export default {
     };
   },
   methods: {
+    noty(){
+      this.$noty.success("Hello world!",{
+      })
+    },
     anunciar() {
       api.post("product", this.produto).then(response => {
-        console.log(response);
+        this.notificacao = true
+        this.anunciando = false
+        setTimeout(() => this.$router.push("/perfil"),3000)
       });
     }
   },
