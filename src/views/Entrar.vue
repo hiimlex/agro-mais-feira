@@ -2,6 +2,7 @@
   <v-container fluid class="my-auto mt-12">
     <v-row align="center" justify="center">
       <v-col cols="12" sm="10" lg="5" xl="5">
+        <v-alert type="error" v-if="error">{{error}}</v-alert>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-card class="mx-auto text-center">
             <router-link to="/" class="router-bar">
@@ -80,7 +81,7 @@ export default {
       valid: true,
       password: "Password",
       mask: "###.###.###-##",
-      error: "",
+      error: false,
       login: {
         cpf: "",
         pass: ""
@@ -95,7 +96,9 @@ export default {
         .then(() => {
           this.$router.push("/");
         })
-        .catch(error => {});
+        .catch(error => {
+          this.error = error.response.data.error;
+        });
     }
   }
 };

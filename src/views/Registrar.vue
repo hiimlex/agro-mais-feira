@@ -49,7 +49,7 @@
                 shaped
                 hint="Este é o seu Número que será utilizado como Contato"
               ></v-text-field>
-               <v-text-field
+              <v-text-field
                 filled
                 shaped
                 color="success"
@@ -99,16 +99,18 @@
             </v-container>
           </v-card>
         </v-form>
-          <v-card class="mx-auto" v-if="notificacao">
-                      <router-link to="/" class="router-bar">
-              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
-            </router-link>
-            <v-container >
-                <v-alert type="success" prominent  color="green dark-3" dark >
-           Conta criada com sucesso, procure a administração da feira para mais informações.
-          </v-alert>
-            </v-container>
-        
+        <v-card class="mx-auto" v-if="notificacao">
+          <router-link to="/" class="router-bar">
+            <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+          </router-link>
+          <v-container>
+            <v-alert
+              type="success"
+              prominent
+              color="green dark-3"
+              dark
+            >Conta criada com sucesso, procure a administração da feira para mais informações.</v-alert>
+          </v-container>
         </v-card>
         <v-row justify="center">
           <v-dialog v-model="modal" persistent scrollable>
@@ -145,7 +147,6 @@
           </v-dialog>
         </v-row>
       </v-col>
-    
     </v-row>
   </v-container>
 </template>
@@ -180,19 +181,21 @@ export default {
   methods: {
     createAccount() {
       if (this.pass !== null) {
-        api.post("user", this.user).then(response => {
-
-            this.error = false
-            this.notificacao = true
-            this.registrando = false
-            setTimeout(() => this.$router.push("/entrar"),3000)
-        /*    setTimeout(function() {
+        api
+          .post("user", this.user)
+          .then(response => {
+            this.error = false;
+            this.notificacao = true;
+            this.registrando = false;
+            setTimeout(() => this.$router.push("/entrar"), 3000);
+            /*    setTimeout(function() {
               router.replace("/entrar");
             }, 1000);
           }*/
-        }).catch(()=>{
-          this.error = true;
-        })
+          })
+          .catch(() => {
+            this.error = true;
+          });
       }
     },
     aceitarTermos() {

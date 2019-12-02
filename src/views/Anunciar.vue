@@ -1,6 +1,4 @@
 <template>
-  
-
   <v-container fluid class="my-auto mt-12">
     <v-row justify="center" align="center">
       <v-col cols="12" sm="10" lg="6" xl="6">
@@ -82,28 +80,28 @@
           </v-card>
         </v-form>
         <v-card class="mx-auto" v-if="notificacao">
-                      <router-link to="/" class="router-bar">
-              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
-            </router-link>
-            <v-container >
-                <v-alert type="success" prominent  color="green dark-3" dark >
-            Seu produto foi cadastrado com sucesso, aguarde aprovação da administração da feira.
-          </v-alert>
-            </v-container>
-        
+          <router-link to="/" class="router-bar">
+            <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+          </router-link>
+          <v-container>
+            <v-alert
+              type="success"
+              prominent
+              color="green dark-3"
+              dark
+            >Seu produto foi cadastrado com sucesso, aguarde aprovação da administração da feira.</v-alert>
+          </v-container>
         </v-card>
       </v-col>
-
     </v-row>
   </v-container>
-
 </template>
 
 <script>
 import { api } from "@/services";
 import vUploadCloud from "../components/v-cloudinary-upload";
 import { Money } from "v-money";
-import { validaToken } from "../mixins"
+import { validaToken } from "../mixins";
 
 export default {
   components: { vUploadCloud, Money },
@@ -113,7 +111,7 @@ export default {
       anunciando: true,
       dialog: true,
       items: null,
-      notificacao:false,
+      notificacao: false,
       money: {
         prefix: "R$ ",
         decimal: ",",
@@ -132,15 +130,14 @@ export default {
     };
   },
   methods: {
-    noty(){
-      this.$noty.success("Hello world!",{
-      })
+    noty() {
+      this.$noty.success("Hello world!", {});
     },
     anunciar() {
       api.post("product", this.produto).then(response => {
-        this.notificacao = true
-        this.anunciando = false
-        setTimeout(() => this.$router.push("/perfil"),3000)
+        this.notificacao = true;
+        this.anunciando = false;
+        setTimeout(() => this.$router.push("/perfil"), 3000);
       });
     }
   },
