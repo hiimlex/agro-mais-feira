@@ -56,8 +56,8 @@
                 <v-card flat color="transparent mt-n5">
                   <v-container>
                     <div></div>
-                    <v-img src="../assets/Logo.png" class="hidden-sm-and-down"></v-img>
-                    <v-img src="../assets/Logo-m.png" class="hidden-md-and-up"></v-img>
+                    <v-img src="../assets/logo.png" class="hidden-sm-and-down"></v-img>
+                    <v-img src="../assets/logo-m.png" class="hidden-md-and-up"></v-img>
                     <v-card-title class="text-center">
                       Bem vindo ao classificados da Feira de animais!
                       <br />Deseja entrar como :
