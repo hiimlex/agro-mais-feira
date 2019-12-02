@@ -80,6 +80,7 @@ export default {
       valid: true,
       password: "Password",
       mask: "###.###.###-##",
+      error: "",
       login: {
         cpf: "",
         pass: ""
@@ -89,9 +90,12 @@ export default {
   },
   methods: {
     logar() {
-      this.$store.dispatch("logarUsuario", this.login).then(() => {
-        this.$router.push("/");
-      });
+      this.$store
+        .dispatch("logarUsuario", this.login)
+        .then(() => {
+          this.$router.push("/");
+        })
+        .catch(error => {});
     }
   }
 };
