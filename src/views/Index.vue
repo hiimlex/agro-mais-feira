@@ -50,7 +50,26 @@
                 <v-icon small>local_atm</v-icon>-->
                 <v-btn to="/perfil">Meus Produtos</v-btn>
                 <v-btn to="/admin">Admin</v-btn>
+                <v-btn @click="overlay = !overlay">Primeira vez</v-btn>
               </div>
+              <v-overlay :value="overlay" opacity="0.9">
+                <v-card flat color="transparent mt-n5">
+                  <v-container>
+                    <div></div>
+                    <v-img src="../assets/Logo.png" class="hidden-sm-and-down"></v-img>
+                    <v-img src="../assets/Logo-m.png" class="hidden-md-and-up"></v-img>
+                    <v-card-title class="text-center">
+                      Bem vindo ao classificados da Feira de animais!
+                      <br />Deseja entrar como :
+                    </v-card-title>
+                    <v-card-actions>
+                      <v-btn color="primary" to="/entrar" class="mr-5">Feirante</v-btn>
+                      <div class="flex-grow-1"></div>
+                      <v-btn color="amber" @click="overlay = false" class="ml-5">Visitante</v-btn>
+                    </v-card-actions>
+                  </v-container>
+                </v-card>
+              </v-overlay>
             </v-container>
           </v-col>
         </v-row>
@@ -69,7 +88,8 @@ export default {
   data() {
     return {
       categorias: null,
-      busca: null
+      busca: null,
+      overlay: null
     };
   },
   methods: {

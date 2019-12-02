@@ -1,11 +1,11 @@
 {
-  "name": "Agro+",
-  "short_name": "AgroMais",
-  "start_url": "./index.html",
+  "name": "Feira de animais",
+  "short_name": "Agro+Feira",
+  "theme_color": "#68b6d1",
+  "background_color": "#b0bec5",
   "display": "fullscreen",
-  "orientation": "portrait",
-  "background_color": "#000000",
-  "theme_color": "#009b36",
+  "Scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
