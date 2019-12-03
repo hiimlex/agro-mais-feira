@@ -49,8 +49,8 @@ const routes = [
 
   },
   {
-    path: '/perfil',
-    name: 'perfil',
+    path: '/meus_produtos',
+    name: 'meus_produtos',
     component: () => import('./views/Perfil.vue'),
     meta: {
       title: "Meu Perfil",
@@ -63,8 +63,15 @@ const routes = [
     component: () => import('./views/Admin.vue'),
     meta: {
       title: "Administrador",
-      login: true
+      login: true,
     }
+  },
+  {
+    path: '/sair',
+    name: 'sair',
+    component: () => import('./views/Sair.vue'),
+
+
   }
 
 

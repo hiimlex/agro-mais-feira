@@ -28,6 +28,7 @@ export default new Vuex.Store({
     },
     deslogar(context) {
       let token = localStorage.removeItem('token')
+      context.commit("UPDATE_LOGIN", false);
       if (!token) {
         return true
       }
