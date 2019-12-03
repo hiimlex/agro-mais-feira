@@ -17,6 +17,7 @@
                 color="success"
                 v-model="login.cpf"
                 label="CPF"
+                type="tel"
                 required="Required"
                 autocorrect="off"
                 autocapitalize="none"
