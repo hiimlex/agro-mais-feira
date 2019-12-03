@@ -1,9 +1,11 @@
 <template>
   <v-app class="poppins-font" dark>
     <v-overlay v-model="popup" opacity="0.9">
-      <v-img src="./assets/logo.png" class="img-responsive"></v-img>
       <v-card flat color="transparent mt-n5">
         <v-container>
+          <div></div>
+          <v-img src="./assets/logo.png" class="hidden-sm-and-down"></v-img>
+          <v-img src="./assets/logo-m.png" class="hidden-md-and-up"></v-img>
           <v-card-title class="text-center">
             Bem vindo ao classificados da Feira de animais!
             <br />Deseja entrar como :
@@ -99,9 +101,6 @@ export default {
   font-size: 36px !important;
   font-weight: 700;
   color: #68b6d1;
-}
-.img-responsive {
-  position: relative;
 }
 .router-bar {
   text-decoration: none;
