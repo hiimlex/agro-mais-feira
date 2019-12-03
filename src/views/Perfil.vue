@@ -30,9 +30,9 @@
           center-active
           centered
         >
-          <v-tab href="#ativos">Ativos</v-tab>
-          <v-tab href="#pendentes">Pendentes</v-tab>
-          <v-tab href="#negados">Negados</v-tab>
+          <v-tab href="#ativos" @click="tab = 'Aceito'">Ativos</v-tab>
+          <v-tab href="#pendentes" @click="tab = 'Pendente'">Pendentes</v-tab>
+          <v-tab href="#negados" @click="tab = 'Negado'">Negados</v-tab>
           <v-tab-item id="ativos" class="grey lighten-3">
             <v-container fluid>
               <v-row class="justify-center">
@@ -44,24 +44,24 @@
                 </v-col>
               </v-row>
               <v-row class="my-auto">
-                <v-col cols="12" xs="12" sm="4" md="4" lg="3" xl="3" class="d-flex">
+                <v-col v-for="ativo in ativos" :key="ativo.id" cols="12" xs="12" sm="4" md="4" lg="3" xl="3" class="d-flex">
                   <v-hover v-slot:default="{ hover }">
                     <v-card
                       class="mx-auto justify-content-center"
                       :elevation="hover ? 12 : 4"
-                      v-for="ativo in ativos"
-                      :key="ativo.id"
+                      
                       link
                       height="350px"
                     >
-                      <v-img max-height="50%" min-height="50%" :src="ativo.foto"></v-img>
+                      <v-img max-height="50%" min-height="50%" :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+ativo.img"
+></v-img>
                       <v-card-text>
                         <v-card-title
                           class="headline justify-center mb-n5 text-no-wrap"
-                        >{{ativo.nome}}</v-card-title>
+                        >{{ativo.title}}</v-card-title>
                         <v-card-title
                           class="justify-center mb-n5 title text-no-wrap success--text font-weight-regular"
-                        >R$ {{ativo.preco}}</v-card-title>
+                        >R$ {{ativo.price}}</v-card-title>
                         <div class="hidden-md-and-up"></div>
                       </v-card-text>
                     </v-card>
@@ -75,29 +75,29 @@
               <v-row class="justify-center">
                 <v-col>
                   <div class="subtitle-1 text-center font-weight-light mb-1">
-                    Dúvida quanto a alguma pendência procure fulano de tal.
+                    Dúvida quanto a alguma pendência? procure a administração da feira.
                     <v-icon small>info</v-icon>
                   </div>
                 </v-col>
               </v-row>
               <v-row class="my-auto">
-                <v-col cols="12" xs="12" sm="4" md="4" lg="3" xl="3" class="d-flex">
+                <v-col v-for="pendente in pendentes"  :key="pendente.id" cols="12" xs="12" sm="4" md="4" lg="3" xl="3" class="d-flex">
                   <v-card
                     class="mx-auto justify-content-center"
                     :elevation="hover ? 12 : 4"
-                    v-for="pendente in pendentes"
-                    :key="pendente.id"
+                    
                     height="350px"
                     readonly
                   >
-                    <v-img max-height="50%" min-height="50%" :src="pendente.foto"></v-img>
+                    <v-img max-height="50%" min-height="50%" :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+pendente.img"
+></v-img>
                     <v-card-text>
                       <v-card-title
                         class="headline justify-center mb-n5 text-no-wrap"
-                      >{{pendente.nome}}</v-card-title>
+                      >{{pendente.title}}</v-card-title>
                       <v-card-title
                         class="justify-center mb-n5 title text-no-wrap success--text font-weight-regular"
-                      >R$ {{pendente.preco}}</v-card-title>
+                      >R$ {{pendente.price}}</v-card-title>
                       <div class="hidden-md-and-up"></div>
                     </v-card-text>
                   </v-card>
@@ -116,25 +116,25 @@
                 </v-col>
               </v-row>
               <v-row class="my-auto">
-                <v-col cols="12" xs="12" sm="4" md="4" lg="3" xl="3" class="d-flex">
+                <v-col v-for="(negado, index) in negados"    :key="negado.id" cols="12" xs="12" sm="4" md="4" lg="3" xl="3" class="d-flex">
                   <v-hover v-slot:default="{ hover }">
                     <v-card
                       class="mx-auto justify-content-center"
                       :elevation="hover ? 12 : 4"
-                      v-for="pendente in pendentes"
-                      :key="pendente.id"
+                      
                       height="350px"
                       link
-                      @click="modal = !modal"
+                      @click="m_negado(index)"
                     >
-                      <v-img max-height="50%" min-height="50%" :src="pendente.foto"></v-img>
+                      <v-img max-height="50%" min-height="50%" :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+negado.img"
+></v-img>
                       <v-card-text>
                         <v-card-title
                           class="headline justify-center mb-n5 text-no-wrap"
-                        >{{pendente.nome}}</v-card-title>
+                        >{{negado.title}}</v-card-title>
                         <v-card-title
                           class="justify-center mb-n5 title text-no-wrap success--text font-weight-regular"
-                        >R$ {{pendente.preco}}</v-card-title>
+                        >R$ {{negado.price}}</v-card-title>
                         <div class="hidden-md-and-up"></div>
                       </v-card-text>
                     </v-card>
@@ -142,19 +142,22 @@
                 </v-col>
               </v-row>
             </v-container>
-            <v-row justify="center">
+            <v-row v-if="modal" justify="center">
               <v-dialog v-model="modal" persistent>
                 <v-card>
                   <v-card-title class="headline text-center">Informações acerca do produto negado</v-card-title>
+                  <br>
                   <v-card-text
                     class="text-justify"
-                  >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem hic rem rerum praesentium molestiae ab similique necessitatibus optio inventore pariatur culpa perspiciatis corrupti quam, repudiandae quaerat odio, incidunt architecto accusamus.</v-card-text>
+                    
+                  >{{ negados[id_negado].product_denied[0].message}}</v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="black" text @click="modal = false">Sair</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
+              
             </v-row>
           </v-tab-item>
         </v-tabs>
@@ -166,48 +169,57 @@
 <script>
 import Cards from "../components/Cards";
 import { validaToken } from "../mixins"
-
+import { api  } from "../services"
 export default {
   mixins: [validaToken],
+  components: { Cards },
 
   data() {
     return {
       dialog: true,
       modal: false,
+      id_negado:null,
       hover: null,
-      ativos: [
-        {
-          foto: require("../assets/uva.jpeg"),
-          nome: "Uva",
-          preco: "5.50",
-          id: 1
-        }
-      ],
-      pendentes: [
-        {
-          foto: require("../assets/uva.jpeg"),
-          nome: "Uva",
-          preco: "5.50",
-          id: 1
-        }
-      ],
-      negados: [
-        {
-          foto: require("../assets/uva.jpeg"),
-          nome: "Uva",
-          preco: "5.50",
-          id: 1
-        }
-      ]
+      tab: null,
+      ativos: [],
+      pendentes: [],
+      negados: []
     };
   },
-  components: { Cards },
+  created(){
+    this.getProdutos()
+  },
   methods: {
+    m_negado(id){
+      this.id_negado = id
+      console.log(id)
+      this.modal = true
+    },
+    getProdutos(){
+      api.get("/my_products")
+      .then(response => {
+        this.produtos = response.data.products
+        this.ativos =     this.produtos.filter(o => o.status === 'Aceito')
+
+      })
+    },
     deslogar(){
         this.$store.dispatch("deslogar").then(response => {
         this.$router.push("/");
       });
       }
+  },
+  watch:{
+    tab: function(){
+      if(this.tab === 'Aceito'){
+        this.ativos =  this.produtos.filter(o => o.status === this.tab)
+      }else if(this.tab === 'Pendente'){
+        this.pendentes =  this.produtos.filter(o => o.status === this.tab)
+      }else{
+        this.negados =  this.produtos.filter(o => o.status === this.tab)
+
+      }
+    }
   }
 };
 </script>

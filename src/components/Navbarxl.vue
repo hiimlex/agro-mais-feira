@@ -37,7 +37,7 @@
         </template>
       </v-text-field>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down mr-3" v-if="!$store.state.login">
+      <v-toolbar-items class="hidden-sm-and-down mr-3" v-if="!$store.state.login && !$store.state.admin">
         <v-btn
           text
           class="hover-link"
@@ -55,6 +55,15 @@
           :to="link.route"
         >{{link.name}}</v-btn>
       </v-toolbar-items>
+         <v-toolbar-items class="hidden-sm-and-down mr-3" v-if="$store.state.admin">
+        <v-btn
+          text
+          class="hover-link"
+          v-for="link in links_admin"
+          :key="link.name"
+          :to="link.route"
+        >{{link.name}}</v-btn>
+      </v-toolbar-items>
     </v-app-bar>
 
     <!-- Sidebar -->
@@ -64,7 +73,7 @@
       </div>
       <v-divider></v-divider>
       <!-- Links -->
-      <v-list dense v-if="!$store.state.login">
+      <v-list dense v-if="!$store.state.login && !$store.state.admin">
         <v-list-item link color="success" v-for="link in links_guest" :key="link.name" :to="link.route">
             <v-list-item-icon>
             <v-icon>{{ link.icon }}</v-icon>
@@ -78,6 +87,18 @@
       </v-list>
       <v-list dense v-if="$store.state.login">
         <v-list-item link color="success" v-for="link in links_logged" :key="link.name" :to="link.route">
+            <v-list-item-icon>
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content >
+            <v-list-item-title class="subtitle font-weight-medium">{{ link.name }}</v-list-item-title>
+          </v-list-item-content>
+          
+        </v-list-item>
+      </v-list>
+      <v-list dense v-if="$store.state.admin">
+        <v-list-item link color="success" v-for="link in links_admin" :key="link.name" :to="link.route">
             <v-list-item-icon>
             <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-icon>
@@ -116,7 +137,7 @@ export default {
       ],
       links_admin: [
         { icon: "home", name: "Home", route: "/"},
-        { icon: "account_box", name: "admin", route: "Admin"},
+        { icon: "account_box", name: "Administração", route: "Admin"},
         { icon: "person_add", name: "Registrar", route: "registrar"},
         { icon: "exit_to_app", name: "Sair", route: "Sair"}
       ],

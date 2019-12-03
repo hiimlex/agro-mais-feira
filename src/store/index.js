@@ -8,10 +8,14 @@ export default new Vuex.Store({
   state: {
     titlelogo: "+Feira",
     login: false,
+    admin: false,
   },
   mutations: {
     UPDATE_LOGIN(state, payload) {
       state.login = payload;
+    },
+    UPDATE_ADMIN(state, payload) {
+      state.admin = payload;
     },
   },
   actions: {
@@ -23,12 +27,10 @@ export default new Vuex.Store({
         })
         .then(response => {
           window.localStorage.token = `${response.data.token}`;
-          context.commit("UPDATE_LOGIN", true);
         });
     },
     deslogar(context) {
       let token = localStorage.removeItem('token')
-      context.commit("UPDATE_LOGIN", false);
       if (!token) {
         return true
       }

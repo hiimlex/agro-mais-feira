@@ -94,7 +94,7 @@ export default {
         .get(this.url)
         .then(response => {
           if (response.data) {
-            this.produtos = response.data.products;
+            this.produtos = response.data.products.reverse();
           }
         })
         .catch(e => {

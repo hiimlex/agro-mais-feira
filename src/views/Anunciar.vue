@@ -137,7 +137,7 @@ export default {
       api.post("product", this.produto).then(response => {
         this.notificacao = true;
         this.anunciando = false;
-        setTimeout(() => this.$router.push("/perfil"), 3000);
+        setTimeout(() => this.$router.push("/meus_produtos"), 3000);
       });
     }
   },

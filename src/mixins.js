@@ -8,6 +8,7 @@ export const validaToken = {
         .validaToken()
         .catch(error => {
           this.$store.commit('UPDATE_LOGIN', false)
+          this.$store.commit('UPDATE_ADMIN', false)
 
           window.localStorage.removeItem('token')
           if(this.$route.path == '/'){
@@ -26,11 +27,17 @@ export const islogged = {
     if (window.localStorage.token) {
       api
         .validaToken()
-        .then(()=>{
-          this.$store.commit('UPDATE_LOGIN', true)
+        .then(response =>{
+          if(response.data.admin){
+            this.$store.commit('UPDATE_ADMIN', true)
+          }else{
+            this.$store.commit('UPDATE_LOGIN', true)
+          }
+          
         })
         .catch(error => {
           this.$store.commit('UPDATE_LOGIN', false)
+          this.$store.commit('UPDATE_ADMIN', false)
 
           window.localStorage.removeItem('token')
 
@@ -42,6 +49,7 @@ export const islogged = {
         })
 
     }else{
+      this.$store.commit('UPDATE_ADMIN', false)
       this.$store.commit('UPDATE_LOGIN', false)
     }
   }
