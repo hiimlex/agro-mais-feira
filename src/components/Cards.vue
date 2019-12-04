@@ -52,6 +52,7 @@ import { serialize } from "@/helpers";
 export default {
   data() {
     return {
+      online: false,
       produtos: null,
       busca: null,
       snackbar: false,
@@ -94,14 +95,19 @@ export default {
         .get(this.url)
         .then(response => {
           if (response.data) {
-            this.produtos = response.data.products.reverse();
+            this.produtos = response.data.products;
           }
         })
         .catch(e => {
+          console.table(e.message)
+          if(e.message === "Network Error"){
+            this.snackbar = true;
+            this.message = "Por favor verifique sua conexão!";
+            this.online = false
+        }else{
           this.snackbar = true;
-          this.message =
-            "Desculpe, não localizamos nenhum produto para esta categoria!";
-        });
+          this.message = e.response.data.message+" !"
+        }});
     }
   },
   watch: {

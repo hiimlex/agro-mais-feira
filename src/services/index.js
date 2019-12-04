@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const axiosInstance = Axios.create({
-  baseURL: 'https://agromais-feira-api.herokuapp.com/'
+  baseURL: 'https://agromais-feira-api.herokuapp.com/',
 })
 
 axiosInstance.interceptors.request.use(

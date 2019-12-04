@@ -28,6 +28,7 @@
       align-center
     >
       <router-view />
+
     </v-content>
   </v-app>
 </template>
@@ -36,16 +37,22 @@ export default {
   name: "App",
   data() {
     return {
-      popup: true
+      popup: false,
+      carregando: true
    }
  },
- 
+ created(){
+   if(this.$route.path === '/'){
+      this.popup = true
+
+   }
+ },
  methods: {
    banner(){
      this.popup = false
    },
    feirante(){
-     this.popup = false
+      this.popup = false
       this.$router.push("/entrar")
    }
  },
