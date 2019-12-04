@@ -15,7 +15,7 @@
           <v-btn icon dark to="/">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title>Produtos da feira</v-toolbar-title>
+          <v-toolbar-title>Administração</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-tabs
@@ -27,8 +27,19 @@
           center-active
           centered
         >
-          <v-tab href="#ativos" @click="tab = 'Aceito'">Ativos </v-tab>
+          <v-tab href="#ativos" @click="tab = 'Aceito'">Aceitos </v-tab>
           <v-tab href="#pendentes" @click="tab = 'Pendente'">Pendentes</v-tab>
+          <v-tab href="#produtores" @click="produtores">Produtores</v-tab>
+
+          <v-tab-item id="produtores" class="grey lighten-3">
+            <v-container fluid>
+              <v-row class="my-auto">
+                <v-col cols="12" xs="12" sm="4" md="4" lg="12" xl="12" class="d-flex">
+ 
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-tab-item>
           <v-tab-item id="ativos" class="grey lighten-3">
             <v-container fluid>
               <v-row class="my-auto">
@@ -204,6 +215,8 @@ export default {
   mixins: [validaToken],
   data() {
     return {
+      search: null,
+      users: null,
       ver: false,
       outro: "",
       mensagem: "",
@@ -217,13 +230,27 @@ export default {
       ativos: [],
       produtos: null,
       tab: null,
-      pendentes: []
+      pendentes: [],
+      headers: [
+         {
+            name: 'Nome',
+            phone: 'Telefone',
+            location: 'Localizacao',
+            
+          },
+      ]
     };
   },
   created(){
     this.getProdutos()
   },
   methods: {
+    produtores(){
+      api.get('user')
+      .then(response => {
+        this.users = Object.assign(response.data.users)
+      })
+    },
     aceitar(s,idProd){
       api.put(`/product/${idProd}`, {
         product: {
@@ -251,7 +278,7 @@ export default {
       })
     },
     getProdutos(){
-      api.get("/product")
+      api.get("/product?admin=true")
       .then(response => {
         this.produtos = response.data.products
         this.ativos =     this.produtos.filter(o => o.status === 'Aceito')

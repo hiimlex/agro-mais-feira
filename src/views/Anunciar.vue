@@ -74,7 +74,7 @@
               <v-divider></v-divider>
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="success" class="white--text" @click.prevent="anunciar">Anunciar</v-btn>
+                <v-btn  color="success" class="white--text" @click.prevent="produtoPut">{{anunciar}}</v-btn>
               </v-card-actions>
             </v-container>
           </v-card>
@@ -89,7 +89,7 @@
               prominent
               color="green dark-3"
               dark
-            >Seu produto foi cadastrado com sucesso, aguarde aprovação da administração da feira.</v-alert>
+            >{{message}}</v-alert>
           </v-container>
         </v-card>
       </v-col>
@@ -111,7 +111,10 @@ export default {
       anunciando: true,
       dialog: true,
       items: null,
+      message: 'Seu produto foi cadastrado com sucesso, aguarde aprovação da administração da feira.',
       notificacao: false,
+      anunciar: 'Anunciar',
+      edicao: false,
       money: {
         prefix: "R$ ",
         decimal: ",",
@@ -129,16 +132,46 @@ export default {
       n: 3
     };
   },
+  created(){
+    this.editar()
+  },
   methods: {
-    noty() {
-      this.$noty.success("Hello world!", {});
+    editar(){
+      const id = this.$route.query.id_prod
+     if(id){
+       api.get(`/product/${id}`)
+       .then(response =>{
+         this.anunciar = 'Editar'
+         this.edicao = true
+          this.produto.title = response.data.product.title;
+          this.produto.price = response.data.product.price;
+          this.produto.img = response.data.product.img;
+          this.produto.desc = response.data.product.desc;
+          this.produto.id_category = response.data.product.id_category
+
+       })
+     }
+        
     },
-    anunciar() {
+    produtoPut() {
+      if(this.edicao) {
+        const id = this.$route.query.id_prod
+       api.put(`/product/${id}`,
+          {product: this.produto
+          }
+       ).then(response => {
+         this.message = response.data.message
+        this.notificacao = true;
+        this.anunciando = false;
+        setTimeout(() => this.$router.push("/meus_produtos"), 3000);
+      });
+      }else{
       api.post("product", this.produto).then(response => {
         this.notificacao = true;
         this.anunciando = false;
         setTimeout(() => this.$router.push("/meus_produtos"), 3000);
       });
+      }
     }
   },
   async mounted() {

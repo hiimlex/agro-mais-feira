@@ -36,7 +36,8 @@ const routes = [
     meta: {
       title: "Anunciar produto ou serviço",
       login: true
-    }
+    },
+    
   },
   {
     path: '/produto/:id',

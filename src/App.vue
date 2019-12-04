@@ -1,12 +1,15 @@
 <template>
   <v-app class="poppins-font" dark>
  
-              <v-overlay v-model="popup" opacity="0.9">
-                <v-card flat color="transparent mt-n5">
+              <v-overlay  v-model="popup" opacity="0.9">
+                <v-card flat  color="transparent mt-n5">
                   <v-container>
                     <div></div>
+                            <v-row align-center>
+
                     <v-img src="./assets/logo.png" class="hidden-sm-and-down"></v-img>
-                    <v-img src="./assets/logo-m.png" class="hidden-md-and-up"></v-img>
+                    <v-img   src="./assets/logo-m.png" width="340" class="hidden-md-and-up"></v-img>
+                            </v-row>
                     <v-card-title class="text-center">
                       Bem vindo ao classificados da Feira de animais!
                       <br />Deseja entrar como :
@@ -36,20 +39,13 @@ export default {
       popup: true
    }
  },
- created(){
-  
-   if(localStorage.popup){
-     this.popup = false
-   }
- },
+ 
  methods: {
    banner(){
      this.popup = false
-     localStorage.popup = false
    },
    feirante(){
      this.popup = false
-     localStorage.popup = false
       this.$router.push("/entrar")
    }
  },

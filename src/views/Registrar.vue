@@ -5,10 +5,10 @@
         <v-form v-if="registrando">
           <v-card class="mx-auto">
             <router-link to="/" class="router-bar">
-              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+              <v-card-title class="logo justify-center font-weight-black display-2">{{$store.state.titlelogo}}</v-card-title>
             </router-link>
             <v-card-title class="title font-weight-regular justify-center">
-              <span>Crie sua conta Agro+Feira</span>
+              <span>Crie sua conta {{$store.state.titlelogo}}</span>
             </v-card-title>
             <v-card-text>
               <v-text-field
@@ -52,6 +52,7 @@
               <v-text-field
                 filled
                 shaped
+                v-model="user.location"
                 color="success"
                 label="Localização"
                 hint="Localização na feira ou serviço (Opcional)"
@@ -62,6 +63,8 @@
                 label="Senha"
                 :type="show ? 'text' : 'password'"
                 color="success"
+                @click:append="show = !show"
+
                 v-model="user.password"
                 :rules="passRules"
                 required
@@ -169,12 +172,13 @@ export default {
       error: false,
       notificacao: false,
       registrando: true,
-      passRules: [v => v >= 6 || "Sua senha deve possuir mais de 6 caracteres"],
+      passRules: [(v) => v.length >= 6 || "Sua senha deve possuir mais de 6 caracteres"],
       user: {
         name: null,
         cpf: null,
         phone: null,
-        password: null
+        location: null,
+        password: '',
       }
     };
   },
@@ -211,7 +215,7 @@ export default {
   },
   computed: {
     errorMsg() {
-      return this.error ? ["Já existe um registro associado a esse CPF"] : [];
+      return this.error ? ["Por favor verifique se o seu cpf está correto"] : [];
     }
   }
 };

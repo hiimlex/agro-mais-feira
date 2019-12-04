@@ -49,7 +49,7 @@
                     <v-card
                       class="mx-auto justify-content-center"
                       :elevation="hover ? 12 : 4"
-                      
+                      @click="editar(ativo.id)"
                       link
                       height="350px"
                     >
@@ -190,9 +190,11 @@ export default {
     this.getProdutos()
   },
   methods: {
+    editar(id){
+        this.$router.replace({ name: "anunciar", query: {id_prod: id} })
+    },
     m_negado(id){
       this.id_negado = id
-      console.log(id)
       this.modal = true
     },
     getProdutos(){

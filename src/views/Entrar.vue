@@ -6,7 +6,7 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-card class="mx-auto text-center">
             <router-link to="/" class="router-bar">
-              <v-card-title class="logo justify-center font-weight-black display-2">Agro+Feira</v-card-title>
+              <v-card-title class="logo justify-center font-weight-black display-2">{{$store.state.titlelogo}}</v-card-title>
             </router-link>
             <v-card-title class="title font-weight-regular justify-center">
               <span>Olá! Insira seu CPF e Senha para continuar.</span>

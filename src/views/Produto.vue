@@ -60,7 +60,7 @@
                     <div class="title font-weight-light mb-2 text-justify">
                       <v-icon left class="mt-n1">room</v-icon>
                       <b>Localização:</b>
-                      {{produto.location}}
+                      {{produto.user.location}}
                     </div>
                     <div class="title font-weight-light mb-2 text-justify">
                       <v-icon left class="mt-n1">phone</v-icon>
@@ -117,7 +117,7 @@
               <div class="title font-weight-light mb-2 text-justify">
                 <v-icon left class="mt-n1">room</v-icon>
                 <b>Localização:</b>
-                {{produto.location}}
+                {{produto.user.location}}
               </div>
               <div class="title font-weight-light mb-2 text-justify">
                 <v-icon left class="mt-n1">phone</v-icon>
