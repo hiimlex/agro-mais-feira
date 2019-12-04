@@ -1,6 +1,10 @@
 {
     "name": "Feira de Animais",
     "short_name": "Feira de Animais",
+    "theme_color": "#68b6d1",
+    "background_color": "#b0bec5",
+    "start_url": "/",
+    "display": "standalone",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -12,9 +16,5 @@
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "theme_color": "#68b6d1",
-    "background_color": "#b0bec5",
-    "start_url": "http://agromaisfeira.crato.ifce.edu.br/#/",
-    "display": "fullscreen"
+    ]
 }
