@@ -2,12 +2,7 @@
   <v-row v-if="produtos" justify="center">
     <v-dialog v-model="dialog" fullscreen hide-overlay light transition="dialog-bottom-transition">
       <v-card class="grey lighten-3">
-        <v-snackbar
-          v-model="snackbar"
-          color="green darken-1"
-          top=""
-          v-if="message"
-        >
+        <v-snackbar v-model="snackbar" color="green darken-1" top v-if="message">
           {{ message }}
           <v-btn depressed color="green darken-1" @click.native="snackbar = false">X</v-btn>
         </v-snackbar>
@@ -27,46 +22,56 @@
           center-active
           centered
         >
-          <v-tab href="#ativos" @click="tab = 'Aceito'">Aceitos </v-tab>
+          <v-tab href="#aceitos" @click="tab = 'Aceito'">Aceitos</v-tab>
           <v-tab href="#pendentes" @click="tab = 'Pendente'">Pendentes</v-tab>
+          <v-tab href="#bloqueados" @click="tab = 'Bloqueado'">Bloqueados</v-tab>
           <v-tab href="#produtores" @click="produtores">Produtores</v-tab>
 
-          <v-tab-item id="produtores" class="grey lighten-3">
+          <v-tab-item id="aceitos" class="grey lighten-3">
             <v-container fluid>
               <v-row class="my-auto">
-                <v-col cols="12" xs="12" sm="4" md="4" lg="12" xl="12" class="d-flex">
- 
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-tab-item>
-          <v-tab-item id="ativos" class="grey lighten-3">
-            <v-container fluid>
-              <v-row class="my-auto">
-                <v-col  v-for="aceito in ativos"
-                      :key="aceito.id" cols="12" xs="12" sm="4" md="4" lg="3" xl="3" class="d-flex">
-                           
-
-                  <v-hover v-slot:default="{ hover }">
-                    <v-card
-                      class="mx-auto justify-content-center"
-                     
-                      link
-                      height="350px"
-                    >
-                      <v-img max-height="50%" lazy-src="" min-height="50%" :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+aceito.img"
-></v-img>
-                      <v-card-text>
-                        <v-card-title
-                          class="headline justify-center mb-n5 text-no-wrap"
-                        >{{aceito.title}}</v-card-title>
-                        <v-card-title
-                          class="justify-center mb-n5 title text-no-wrap success--text font-weight-regular"
-                        >R$ {{aceito.price}}</v-card-title>
-
-                      </v-card-text>
-                    </v-card>
-                  </v-hover>
+                <v-col
+                  v-for="aceito in aceitos"
+                  :key="aceito.id"
+                  cols="12"
+                  xs="12"
+                  sm="4"
+                  md="4"
+                  lg="3"
+                  xl="3"
+                  class="d-flex"
+                >
+                  <v-card class="mx-auto justify-content-center" height="350px">
+                    <v-img
+                      max-height="50%"
+                      lazy-src
+                      min-height="50%"
+                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+aceito.img"
+                    ></v-img>
+                    <v-card-text>
+                      <v-card-title
+                        class="headline justify-center mb-n5 text-no-wrap"
+                      >{{aceito.title}}</v-card-title>
+                      <v-card-title
+                        class="justify-center mb-n5 title text-no-wrap success--text font-weight-regular"
+                      >R$ {{aceito.price}}</v-card-title>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-btn color="info" dark v-on="on">Editar</v-btn>
+                        </template>
+                        <span>Bloquear o Produto</span>
+                      </v-tooltip>
+                      <div class="flex-grow-1"></div>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-btn color="secondary" dark v-on="on">Bloquear</v-btn>
+                        </template>
+                        <span>Bloquear o Produto</span>
+                      </v-tooltip>
+                    </v-card-actions>
+                  </v-card>
                 </v-col>
               </v-row>
             </v-container>
@@ -74,15 +79,23 @@
           <v-tab-item id="pendentes" class="grey lighten-3">
             <v-container fluid>
               <v-row class="my-auto">
-                <v-col   v-for="pendente in pendentes"  :key="pendente.id" cols="12" xs="12" sm="4" md="4" lg="3" xl="3" class="d-flex">
-                  <v-card
-                    class="mx-auto justify-content-center"
-                  
-                    height="350px"
-                    readonly
-                  >
-                    <v-img max-height="50%" min-height="50%"  :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+pendente.img"
-></v-img>
+                <v-col
+                  v-for="pendente in pendentes"
+                  :key="pendente.id"
+                  cols="12"
+                  xs="12"
+                  sm="4"
+                  md="4"
+                  lg="3"
+                  xl="3"
+                  class="d-flex"
+                >
+                  <v-card class="mx-auto justify-content-center" height="350px" readonly>
+                    <v-img
+                      max-height="50%"
+                      min-height="50%"
+                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+pendente.img"
+                    ></v-img>
                     <v-card-text class="mt-n3">
                       <v-card-title
                         class="headline justify-center mb-n5 text-no-wrap"
@@ -90,13 +103,18 @@
                       <v-card-title
                         class="justify-center mb-n5 title text-no-wrap success--text font-weight-regular"
                       >R$ {{pendente.price}}</v-card-title>
-                      
+
                       <div class="hidden-md-and-up"></div>
                     </v-card-text>
                     <v-card-actions>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="primary" dark v-on="on" @click="aceitar('Aceito',pendente.id)">Aceitar</v-btn>
+                          <v-btn
+                            color="primary"
+                            dark
+                            v-on="on"
+                            @click="aceitar('Aceito',pendente.id)"
+                          >Aceitar</v-btn>
                         </template>
                         <span>Aceitar o Produto</span>
                       </v-tooltip>
@@ -193,7 +211,10 @@
                       <v-card-actions>
                         <v-btn color="seccondary" @click="negar = false">Cancelar</v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="error" @click="negado('Negado', pendente.id), negar = false">Enviar</v-btn>
+                        <v-btn
+                          color="error"
+                          @click="negado('Negado', pendente.id), negar = false"
+                        >Enviar</v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
@@ -201,16 +222,65 @@
               </v-row>
             </v-container>
           </v-tab-item>
+          <v-tab-item id="bloqueados" class="grey lighten-3">
+            <v-container fluid>
+              <v-row class="my-auto">
+                <v-col
+                  v-for="bloqueado in bloqueados"
+                  :key="bloqueado.id"
+                  cols="12"
+                  xs="12"
+                  sm="4"
+                  md="4"
+                  lg="3"
+                  xl="3"
+                  class="d-flex"
+                >
+                  <v-card class="mx-auto justify-content-center" height="350px">
+                    <v-img
+                      max-height="50%"
+                      lazy-src
+                      min-height="50%"
+                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+bloqueado.img"
+                    ></v-img>
+                    <v-card-text>
+                      <v-card-title
+                        class="headline justify-center mb-n5 text-no-wrap"
+                      >{{bloqueado.title}}</v-card-title>
+                      <v-card-title
+                        class="justify-center mb-n5 title text-no-wrap success--text font-weight-regular"
+                      >R$ {{bloqueado.price}}</v-card-title>
+                    </v-card-text>
+                    <v-card-actions>
+                      <div class="flex-grow-1"></div>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-btn color="primary" dark v-on="on">Desbloquear</v-btn>
+                        </template>
+                        <span>Desbloquear o Produto</span>
+                      </v-tooltip>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-tab-item>
+          <v-tab-item id="produtores" class="grey lighten-3">
+            <v-container fluid>
+              <v-row class="my-auto">
+                <v-col cols="12" xs="12" sm="4" md="4" lg="12" xl="12" class="d-flex"></v-col>
+              </v-row>
+            </v-container>
+          </v-tab-item>
         </v-tabs>
       </v-card>
     </v-dialog>
-    
   </v-row>
 </template>
 
 <script>
-import { validaToken } from "../mixins"
-import { api } from "../services"
+import { validaToken } from "../mixins";
+import { api } from "../services";
 export default {
   mixins: [validaToken],
   data() {
@@ -227,75 +297,73 @@ export default {
       snackbar: false,
       message: null,
       timeout: 6000,
-      ativos: [],
+      aceitos: [],
       produtos: null,
       tab: null,
       pendentes: [],
+      bloqueados: [],
       headers: [
-         {
-            name: 'Nome',
-            phone: 'Telefone',
-            location: 'Localizacao',
-            
-          },
+        {
+          name: "Nome",
+          phone: "Telefone",
+          location: "Localizacao"
+        }
       ]
     };
   },
-  created(){
-    this.getProdutos()
+  created() {
+    this.getProdutos();
   },
   methods: {
-    produtores(){
-      api.get('user')
-      .then(response => {
-        this.users = Object.assign(response.data.users)
-      })
+    produtores() {
+      api.get("user").then(response => {
+        this.users = Object.assign(response.data.users);
+      });
     },
-    aceitar(s,idProd){
-      api.put(`/product/${idProd}`, {
-        product: {
-          status: "Aceito"
-        }        
-      }).then(response => {
-        this.snackbar = true
-        this.message = response.data.message
-        location.reload();
-
-      })
+    aceitar(s, idProd) {
+      api
+        .put(`/product/${idProd}`, {
+          product: {
+            status: "Aceito"
+          }
+        })
+        .then(response => {
+          this.snackbar = true;
+          this.message = response.data.message;
+          location.reload();
+        });
     },
-    negado(s,idProd){
-      api.put(`/product/${idProd}`, {
-        product: {
-          status: "Negado",
-        },
-        message: this.mensagem
-
-      }).then(response => {
-        this.snackbar = true
-        this.message = response.data.message
-        location.reload();
-
-      })
+    negado(s, idProd) {
+      api
+        .put(`/product/${idProd}`, {
+          product: {
+            status: "Negado"
+          },
+          message: this.mensagem
+        })
+        .then(response => {
+          this.snackbar = true;
+          this.message = response.data.message;
+          location.reload();
+        });
     },
-    getProdutos(){
-      api.get("/product?admin=true")
-      .then(response => {
-        this.produtos = response.data.products
-        this.ativos =     this.produtos.filter(o => o.status === 'Aceito')
-
-      })
-    },
-
+    getProdutos() {
+      api.get("/product?admin=true").then(response => {
+        this.produtos = response.data.products;
+        this.ativos = this.produtos.filter(o => o.status === "Aceito");
+      });
+    }
   },
   watch: {
-    tab: function(){
-      if(this.tab === 'Aceito'){
-        this.ativos =  this.produtos.filter(o => o.status === this.tab)
-      }else{
-        this.pendentes =  this.produtos.filter(o => o.status === this.tab)
+    tab: function() {
+      if (this.tab === "Aceito") {
+        this.aceitos = this.produtos.filter(o => o.status === this.tab);
+      } else if (this.tab === "Bloqueado") {
+        this.bloqueados = this.produtos.filter(o => o.status === this.tab);
+      } else if (this.tab === "Pendente") {
+        this.pendentes = this.produtos.filter(o => o.status === this.tab);
       }
     }
   }
-  
 };
 </script>
