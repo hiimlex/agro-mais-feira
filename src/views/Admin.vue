@@ -21,11 +21,12 @@
           background-color="success"
           center-active
           centered
+          v-model="tabSelected"
         >
-          <v-tab href="#aceitos" @click="tab = 'Aceito'">Aceitos</v-tab>
-          <v-tab href="#pendentes" @click="tab = 'Pendente'">Pendentes</v-tab>
-          <v-tab href="#bloqueados" @click="tab = 'Bloqueado'">Bloqueados</v-tab>
-          <v-tab href="#produtores" @click="produtores">Produtores</v-tab>
+          <v-tab key="0" href="#aceitos" @click="tab = 'Aceito'">Aceitos</v-tab>
+          <v-tab key="1" href="#pendentes" @click="tab = 'Pendente'">Pendentes</v-tab>
+          <v-tab key="2" href="#bloqueados" @click="tab = 'Bloqueado'">Bloqueados</v-tab>
+          <v-tab key="3" href="#produtores" @click="produtores">Produtores</v-tab>
 
           <v-tab-item id="aceitos" class="grey lighten-3">
             <v-container fluid>
@@ -59,7 +60,7 @@
                     <v-card-actions>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="info" dark v-on="on">Editar</v-btn>
+                          <v-btn color="info" dark v-on="on" @click="acao('e', aceito.id)">Editar</v-btn>
                         </template>
                         <span>Bloquear o Produto</span>
                       </v-tooltip>
@@ -264,7 +265,28 @@
           <v-tab-item id="produtores" class="grey lighten-3">
             <v-container fluid>
               <v-row class="my-auto">
-                <v-col cols="12" xs="12" sm="4" md="4" lg="12" xl="12" class="d-flex"></v-col>
+                <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" class="d-flex justify-center">
+                    <v-card v-if="users">
+    <v-card-title>
+      Listando cadastros.
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Pesquisar"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="users"
+      :search="search"
+      
+    ></v-data-table>
+    
+  </v-card>
+                </v-col>
               </v-row>
             </v-container>
           </v-tab-item>
@@ -281,7 +303,7 @@ export default {
   mixins: [validaToken],
   data() {
     return {
-      search: null,
+      search: '',
       users: null,
       ver: false,
       outro: "",
@@ -290,6 +312,7 @@ export default {
       dialog: true,
       modal: false,
       hover: 2,
+      tabSelected: null,
       id_prod: null,
       snackbar: false,
       message: null,
@@ -300,11 +323,12 @@ export default {
       pendentes: [],
       bloqueados: [],
       headers: [
-        {
-          name: "Nome",
-          phone: "Telefone",
-          location: "Localizacao"
-        }
+          { text: 'Nome:', value: 'name' },
+          { text: 'Telefone:', value: 'phone' },
+          { text: 'CPF:', value: 'cpf' },
+          { text: 'Senha:', value: 'password' },
+          { text: 'Localização:', value: 'location' }
+          
       ]
     };
   },
@@ -331,8 +355,10 @@ export default {
            this.message = 'Produto Desbloqueado!';
            location.reload();
         })
-      }else if(acao === 'editar'){
-        
+      }else if(acao === 'e'){
+              this.$router.replace({ name: "anunciar", query: { id_prod: id, admin: true } });
+
+          
       }else{
         alert("Contate o administrador do sistema")
       }
@@ -344,7 +370,7 @@ export default {
     },
     produtores() {
       api.get("user").then(response => {
-        this.users = Object.assign(response.data.users);
+        this.users = response.data.users;
       });
     },
     aceitar(s, idProd) {

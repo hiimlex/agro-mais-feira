@@ -62,11 +62,7 @@
                       <b>Localização:</b>
                       {{produto.user.location}}
                     </div>
-                    <div class="title font-weight-light mb-2 text-justify">
-                      <v-icon left class="mt-n1">phone</v-icon>
-                      <b>Contato:</b>
-                      {{produto.user.phone}}
-                    </div>
+
                     <div class="title font-weight-light mb-2 text-justify">
                       <v-icon left class="mt-n1">info</v-icon>
                       <b>Descrição:</b>
@@ -118,11 +114,6 @@
                 <v-icon left class="mt-n1">room</v-icon>
                 <b>Localização:</b>
                 {{produto.user.location}}
-              </div>
-              <div class="title font-weight-light mb-2 text-justify">
-                <v-icon left class="mt-n1">phone</v-icon>
-                <b>Contato:</b>
-                {{produto.user.phone}}
               </div>
               <div class="title font-weight-light mb-2 text-justify">
                 <v-icon left class="mt-n1">info</v-icon>

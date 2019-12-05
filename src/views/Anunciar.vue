@@ -173,19 +173,42 @@ export default {
           this.produto.img = response.data.product.img;
           this.produto.desc = response.data.product.desc;
           this.produto.id_category = response.data.product.id_category;
+        }).catch(()=>{
+          this.$router.push("/")
         });
       }
     },
     produtoPut() {
       if (this.edicao) {
         const id = this.$route.query.id_prod;
-        api.put(`/product/${id}`, { product: this.produto }).then(response => {
+         const admin_edit = this.$route.query.admin;
+
+        api.put(`/product/${id}`, {
+          product: {
+            status: 'Pendente',
+            title: this.produto.title,
+            price: this.produto.price,
+            img: this.produto.img,
+            desc: this.produto.desc,
+            id_category: this.produto.id_category,
+            
+          }
+          
+          },
+          {
+            
+          }).then(response => {
           this.message = response.data.message;
           this.notificacao = true;
           this.anunciando = false;
+           if(admin_edit){
+            setTimeout(() => this.$router.push("/Admin"), 3000);
+          }else{
           setTimeout(() => this.$router.push("/meus_produtos"), 3000);
+          }
         });
       } else {
+        console.log(admin_edit)
         api.post("product", this.produto).then(response => {
           this.notificacao = true;
           this.anunciando = false;
