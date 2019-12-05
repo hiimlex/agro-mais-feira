@@ -13,6 +13,8 @@
             rounded
             v-model="busca"
             @append-icon-cb="buscarProdutos"
+             v-on:keyup.enter="buscarProdutos"
+
             class="mb-n5"
           >
             <template slot="append">
@@ -20,7 +22,6 @@
                 v-if="busca"
                 color="success"
                 @click.prevent="buscarProdutos"
-                v-on:keyup.enter="buscarProdutos"
               >search</v-icon>
             </template>
           </v-text-field>

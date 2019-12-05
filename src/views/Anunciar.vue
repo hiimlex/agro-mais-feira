@@ -208,7 +208,7 @@ export default {
           }
         });
       } else {
-        console.log(admin_edit)
+
         api.post("product", this.produto).then(response => {
           this.notificacao = true;
           this.anunciando = false;

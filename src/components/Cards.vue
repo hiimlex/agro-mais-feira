@@ -36,7 +36,7 @@
             ></v-img>
             <v-card-text class="justify-center mt-n4">
               <v-card-title class="text-truncate justify-center">{{produto.title}}</v-card-title>
-              <v-row class="justify-center subtitle-1 text-truncate">{{produto.user.name}}</v-row>
+              <v-row class="justify-center subtitle-1 "><span class="text-truncate">{{produto.user.name}}</span></v-row>
               <v-row class="justify-center green--text body-1">R$ {{produto.price}}</v-row>
             </v-card-text>
           </v-card>

@@ -25,6 +25,7 @@
         solo
         rounded
         v-model="busca"
+          v-on:keyup.enter="buscarProdutos"
         class="mt-8 border-color-green-search hidden-sm-and-down"
       >
         <template slot="append">
