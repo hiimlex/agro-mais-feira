@@ -73,6 +73,13 @@ const routes = [
     component: () => import('./views/Sair.vue'),
 
 
+  },
+  {
+    path: '/sobre',
+    name: 'sobre',
+    component: () => import('./components/Sobre.vue'),
+
+
   }
 
 

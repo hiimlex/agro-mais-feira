@@ -127,7 +127,8 @@ export default {
         { icon: "home", name: "Home", route: "/"},
         { icon: "person", name: "Entrar", route: "entrar"},
         { icon: "person_add", name: "Registrar", route: "registrar"},
-        { icon: "local_atm", name: "Anunciar", route: "anunciar"}
+        { icon: "local_atm", name: "Anunciar", route: "anunciar"},
+        { icon: "info", name: "Sobre", route: "sobre"}
       ],
       links_logged: [
         { icon: "home", name: "Home", route: "/"},
