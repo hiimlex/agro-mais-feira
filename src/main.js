@@ -4,11 +4,13 @@ import vuetify from './plugins/vuetify';
 import router from './router'
 import store from './store'
 import Loading from './components/progress'
+import Banner from './components/banner'
 
 
 Vue.config.productionTip = false
 
-Vue.component("Loading", Loading);
+Vue.component("Loading", Loading)
+Vue.component("Banner", Banner )
 new Vue({
   vuetify,
   router,

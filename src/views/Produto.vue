@@ -28,7 +28,7 @@
                       aspect-ratio="1.7"
                       height="350"
                       width="350"
-                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
+                      :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
                     ></v-img>
                   </div>
                 </v-col>
@@ -82,7 +82,7 @@
           <div>
             <v-img
               height="300"
-              :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
+              :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
             ></v-img>
           </div>
           <v-card flat class="white">

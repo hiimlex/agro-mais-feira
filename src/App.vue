@@ -1,27 +1,5 @@
 <template>
   <v-app class="poppins-font" dark>
- 
-              <v-overlay  v-if="popup" opacity="0.9">
-                <v-card flat  color="transparent mt-n5">
-                  <v-container>
-                    <div></div>
-                            <v-row align-center>
-
-                    <v-img src="./assets/logo.png" class="hidden-sm-and-down"></v-img>
-                    <v-img   src="./assets/logo-m.png" width="340" class="hidden-md-and-up"></v-img>
-                            </v-row>
-                    <v-card-title class="text-center">
-                      Bem vindo ao classificados da Feira de animais!
-                      <br />Deseja entrar como :
-                    </v-card-title>
-                    <v-card-actions>
-                      <v-btn color="primary" @click="feirante" class="mr-5">Feirante</v-btn>
-                      <div class="flex-grow-1"></div>
-                      <v-btn color="amber" @click="banner" class="ml-5">Visitante</v-btn>
-                    </v-card-actions>
-                  </v-container>
-                </v-card>
-              </v-overlay>
     <v-content
       class="grey lighten-3 justify-content-center"
       transition="fade-transition"
@@ -30,6 +8,7 @@
       <router-view />
 
     </v-content>
+
   </v-app>
 </template>
 <script>
@@ -41,22 +20,9 @@ export default {
    }
  },
  
- methods: {
-   banner(){
-     this.popup = false
-   },
-   feirante(){
-      this.popup = false
-      this.$router.push("/entrar")
-   }
- },
   watch: {
     $route(to, from) {
       document.title = to.meta.title;
-      if(to.path === '/'){
-          this.popup = false
-      }
-      
     }
   }
 };

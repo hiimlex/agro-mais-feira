@@ -215,7 +215,7 @@ export default {
   },
   computed: {
     errorMsg() {
-      return this.error ? ["Por favor verifique se o seu cpf está correto"] : [];
+      return this.error ? ["Por favor verifique se o seu cpf está correto."] : [];
     }
   }
 };

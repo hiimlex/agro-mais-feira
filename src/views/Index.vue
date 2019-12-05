@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbarxl />
+    <Banner />
     <v-container class="my-auto">
       <div>
         <div class="hidden-sm-and-up">

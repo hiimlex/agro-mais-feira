@@ -32,7 +32,7 @@
             <v-img
               max-height="60%"
               min-height="60%"
-              :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
+              :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
             ></v-img>
             <v-card-text class="justify-center mt-n4">
               <v-card-title class="text-truncate justify-center">{{produto.title}}</v-card-title>
@@ -99,15 +99,11 @@ export default {
           }
         })
         .catch(e => {
-          console.table(e.message)
-          if(e.message === "Network Error"){
-            this.snackbar = true;
-            this.message = "Por favor verifique sua conexão!";
-            this.online = false
-        }else{
+
           this.snackbar = true;
           this.message = e.response.data.message+" !"
-        }});
+    
+        });
     }
   },
   watch: {
@@ -116,7 +112,13 @@ export default {
     }
   },
   created() {
-    this.getProdutos();
+    if(window.navigator.onLine){
+      this.getProdutos();
+    }else{
+            this.snackbar = true;
+            this.message = "Por favor verifique sua conexão!";
+            this.online = false
+    }
   }
 };
 </script>

@@ -46,7 +46,7 @@
                       max-height="50%"
                       lazy-src
                       min-height="50%"
-                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+aceito.img"
+                      :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+aceito.img"
                     ></v-img>
                     <v-card-text>
                       <v-card-title
@@ -94,7 +94,7 @@
                     <v-img
                       max-height="50%"
                       min-height="50%"
-                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+pendente.img"
+                      :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+pendente.img"
                     ></v-img>
                     <v-card-text class="mt-n3">
                       <v-card-title
@@ -237,7 +237,7 @@
                       max-height="50%"
                       lazy-src
                       min-height="50%"
-                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+bloqueado.img"
+                      :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+bloqueado.img"
                     ></v-img>
                     <v-card-text>
                       <v-card-title

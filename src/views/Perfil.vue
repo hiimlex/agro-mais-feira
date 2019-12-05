@@ -36,6 +36,14 @@
           <v-tab href="#negados" @click="tab = 'Negado'">Negados</v-tab>
 
           <v-tab-item id="aceitos" class="grey lighten-3">
+                                      <v-row class="justify-center">
+                <v-col>
+                  <div class="subtitle-1 text-center font-weight-light mb-1">
+                   Listando produtos aceitos.
+                    <v-icon small>info</v-icon>
+                  </div>
+                </v-col>
+              </v-row>
             <v-container fluid>
               <v-row class="my-auto">
                 <v-col
@@ -54,7 +62,7 @@
                       max-height="50%"
                       lazy-src
                       min-height="50%"
-                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+aceito.img"
+                      :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+aceito.img"
                     ></v-img>
                     <v-card-text>
                       <v-card-title
@@ -116,7 +124,7 @@
                     <v-img
                       max-height="50%"
                       min-height="50%"
-                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+pendente.img"
+                      :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+pendente.img"
                     ></v-img>
                     <v-card-text>
                       <v-card-title
@@ -165,7 +173,7 @@
                       <v-img
                         max-height="50%"
                         min-height="50%"
-                        :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+negado.img"
+                        :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+negado.img"
                       ></v-img>
                       <v-card-text>
                         <v-card-title
@@ -198,6 +206,14 @@
             </v-row>
           </v-tab-item>
           <v-tab-item id="bloqueados" class="grey lighten-3">
+                          <v-row class="justify-center">
+                <v-col>
+                  <div class="subtitle-1 text-center font-weight-light mb-1">
+                   Listando produtos bloqueados.
+                    <v-icon small>info</v-icon>
+                  </div>
+                </v-col>
+              </v-row>
             <v-container fluid>
               <v-row class="my-auto">
                 <v-col
@@ -216,7 +232,7 @@
                       max-height="50%"
                       lazy-src
                       min-height="50%"
-                      :src="'https://res.cloudinary.com/djwxazf5a/image/upload/c_fill,h_500,q_100,w_500/'+bloqueado.img"
+                      :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+bloqueado.img"
                     ></v-img>
                     <v-card-text>
                       <v-card-title
