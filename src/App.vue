@@ -1,7 +1,7 @@
 <template>
   <v-app class="poppins-font" dark>
  
-              <v-overlay  v-model="popup" opacity="0.9">
+              <v-overlay  v-if="popup" opacity="0.9">
                 <v-card flat  color="transparent mt-n5">
                   <v-container>
                     <div></div>
@@ -38,15 +38,9 @@ export default {
   data() {
     return {
       popup: false,
-      carregando: true
    }
  },
- created(){
-   if(this.$route.path === '/'){
-      this.popup = true
-
-   }
- },
+ 
  methods: {
    banner(){
      this.popup = false
@@ -59,6 +53,10 @@ export default {
   watch: {
     $route(to, from) {
       document.title = to.meta.title;
+      if(to.path === '/'){
+          this.popup = false
+      }
+      
     }
   }
 };

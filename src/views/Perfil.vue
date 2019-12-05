@@ -65,22 +65,17 @@
                       >R$ {{aceito.price}}</v-card-title>
                     </v-card-text>
                     <v-card-actions>
+
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="info" dark v-on="on">Editar</v-btn>
+                          <v-btn color="primary" dark v-on="on" @click="editar(aceito.id)">Editar</v-btn>
                         </template>
                         <span>Editar o Produto</span>
-                      </v-tooltip>
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on }">
-                          <v-btn color="secondary" dark v-on="on" @click="editar(aceito.id)">Editar</v-btn>
-                        </template>
-                        <span>Bloquear o Produto</span>
                       </v-tooltip>
                       <div class="flex-grow-1"></div>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="error" dark v-on="on">Bloquear</v-btn>
+                          <v-btn color="warning"  dark v-on="on" @click="acao('b',aceito.id)">Bloquear</v-btn>
                         </template>
                         <span>Bloquear o Produto</span>
                       </v-tooltip>
@@ -235,7 +230,7 @@
                       <div class="flex-grow-1"></div>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="primary" dark v-on="on">Desbloquear</v-btn>
+                          <v-btn color="primary" block dark v-on="on" @click="acao('d',bloqueado.id)">Desbloquear</v-btn>
                         </template>
                         <span>Desbloquear o Produto</span>
                       </v-tooltip>
@@ -276,6 +271,31 @@ export default {
     this.getProdutos();
   },
   methods: {
+   acao(acao, id){
+      if(acao === 'b'){
+        api.put(`product/${id}`, {
+          product: {
+            status: 'Bloqueado'
+          }
+        }).then(response => {
+           this.message = 'Produto Bloqueado!';
+          location.reload();
+        })
+      }else if(acao === 'd'){
+        api.put(`product/${id}`, {
+          product: {
+            status: 'Aceito'
+          }
+        }).then(response => {
+           this.message = 'Produto Desbloqueado!';
+           location.reload();
+        })
+      }else{
+           alert("Contate o administrador do sistema")
+
+      }
+      }
+      ,
     editar(id) {
       this.$router.replace({ name: "anunciar", query: { id_prod: id } });
     },

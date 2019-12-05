@@ -66,7 +66,7 @@
                       <div class="flex-grow-1"></div>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="secondary" dark v-on="on">Bloquear</v-btn>
+                          <v-btn color="warning" dark v-on="on" @click="acao('b', aceito.id)">Bloquear</v-btn>
                         </template>
                         <span>Bloquear o Produto</span>
                       </v-tooltip>
@@ -80,7 +80,7 @@
             <v-container fluid>
               <v-row class="my-auto">
                 <v-col
-                  v-for="pendente in pendentes"
+                  v-for="(pendente,index) in pendentes"
                   :key="pendente.id"
                   cols="12"
                   xs="12"
@@ -110,7 +110,7 @@
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
                           <v-btn
-                            color="primary"
+                            color="green darken-3"
                             dark
                             v-on="on"
                             @click="aceitar('Aceito',pendente.id)"
@@ -122,40 +122,44 @@
                       <div class="flex-grow-1"></div>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="accent" dark v-on="on" @click="ver = true">Ver</v-btn>
+                          <v-btn color="accent" dark v-on="on" @click="id_produto(index), ver = true">Ver</v-btn>
                         </template>
                         <span>Ver o Produto</span>
                       </v-tooltip>
                       <div class="flex-grow-1"></div>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="error" dark v-on="on" @click="negar = true">Negar</v-btn>
+                          <v-btn color="red darken-1" dark v-on="on" @click="id_produto(pendente.id),negar = true">Negar</v-btn>
                         </template>
                         <span>Negar o Produto</span>
                       </v-tooltip>
                     </v-card-actions>
-                    <v-dialog persistent max-width="500px" v-model="ver">
+
+                  </v-card>
+
+                </v-col>
+                  <v-dialog v-if="ver" persistent max-width="500px" v-model="ver">
                       <v-card>
                         <v-container fluid>
                           <v-card-title class="subtitle-1">
                             <span class="font-weight-medium">Produtor:</span> &nbsp;
-                            <span class="font-weight-regular">{{pendente.user.name}}</span>
+                            <span class="font-weight-regular">{{pendentes[id_prod].user.name}}</span>
                           </v-card-title>
                           <v-card-title class="subtitle-1">
                             <span class="font-weight-medium">Contato:</span> &nbsp;
-                            <span class="font-weight-regular">{{pendente.user.phone}}</span>
+                            <span class="font-weight-regular">{{pendentes[id_prod].user.phone}}</span>
                           </v-card-title>
                           <v-card-title class="subtitle-1">
                             <span class="font-weight-medium">Categoria:</span> &nbsp;
-                            <span class="font-weight-regular">{{pendente.category.name}}</span>
+                            <span class="font-weight-regular">{{pendentes[id_prod].category.name}}</span>
                           </v-card-title>
                           <v-card-title class="subtitle-1">
                             <span class="font-weight-medium">Localização:</span> &nbsp;
-                            <span class="font-weight-regular">{{pendente.user.location}}</span>
+                            <span class="font-weight-regular">{{pendentes[id_prod].user.location}}</span>
                           </v-card-title>
                           <v-card-title class="subtitle-1">
                             <span class="font-weight-medium">Descrição:</span> &nbsp;
-                            <span class="font-weight-regular">{{pendente.desc}}</span>
+                            <span class="font-weight-regular">{{pendentes[id_prod].desc}}</span>
                           </v-card-title>
                         </v-container>
                         <v-card-actions>
@@ -168,34 +172,29 @@
                           >Fechar</v-btn>
                         </v-card-actions>
                       </v-card>
-                    </v-dialog>
-                  </v-card>
-                  <v-dialog v-model="negar" persistent max-width="500px">
+                 </v-dialog>
+                <v-dialog v-if="negar" v-model="negar" persistent max-width="500px">
                     <v-card>
                       <v-card-title
                         class="headline justify-center"
                       >Informe ao produtor o que há de errado com esse produto.</v-card-title>
                       <v-container fluid>
                         <v-form>
-                          <v-radio-group v-model="mensagem">
+                          <v-radio-group v-if="!outro" v-model="mensagem">
                             <v-radio
                               label="1 - Este produto contém uma imagem com conteudo explicito."
-                              value="1 - Este produto contém uma imagem com conteudo explicito."
+                              value="Este produto contém uma imagem com conteudo explicito."
                             ></v-radio>
                             <v-radio
                               label="2 - A imagem não condiz com o nome do produto."
-                              value="2 - A imagem não condiz com o nome do produto."
+                              value="A imagem não condiz com o nome do produto."
                             ></v-radio>
                             <v-radio
                               label="3 - O produto não está na categoria correta"
-                              value="3 - O produto não está na categoria correta"
-                            ></v-radio>
-                            <v-radio
-                              label="4 - Descrição não está legivel."
-                              value="4 - Descrição não está legivel."
+                              value="O produto não está na categoria correta."
                             ></v-radio>
                           </v-radio-group>
-                          <v-checkbox label="Outro:" class="mt-n3" v-model="outro"></v-checkbox>
+                          <v-checkbox  label="Outro:" class="mt-n3" v-model="outro"></v-checkbox>
                           <v-textarea
                             v-if="outro"
                             filled
@@ -211,15 +210,12 @@
                       <v-card-actions>
                         <v-btn color="seccondary" @click="negar = false">Cancelar</v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn
-                          color="error"
-                          @click="negado('Negado', pendente.id), negar = false"
-                        >Enviar</v-btn>
+                        <v-btn color="error" @click="negado('Negado', id_prod), negar = false">Enviar</v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
-                </v-col>
               </v-row>
+
             </v-container>
           </v-tab-item>
           <v-tab-item id="bloqueados" class="grey lighten-3">
@@ -255,7 +251,7 @@
                       <div class="flex-grow-1"></div>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="primary" dark v-on="on">Desbloquear</v-btn>
+                          <v-btn color="primary" dark block v-on="on" @click="acao('d', bloqueado.id)">Desbloquear</v-btn>
                         </template>
                         <span>Desbloquear o Produto</span>
                       </v-tooltip>
@@ -294,6 +290,7 @@ export default {
       dialog: true,
       modal: false,
       hover: 2,
+      id_prod: null,
       snackbar: false,
       message: null,
       timeout: 6000,
@@ -315,6 +312,36 @@ export default {
     this.getProdutos();
   },
   methods: {
+    acao(acao, id){
+      if(acao === 'b'){
+        api.put(`product/${id}`, {
+          product: {
+            status: 'Bloqueado'
+          }
+        }).then(response => {
+           this.message = 'Produto Bloqueado!';
+          location.reload();
+        })
+      }else if(acao === 'd'){
+        api.put(`product/${id}`, {
+          product: {
+            status: 'Aceito'
+          }
+        }).then(response => {
+           this.message = 'Produto Desbloqueado!';
+           location.reload();
+        })
+      }else if(acao === 'editar'){
+        
+      }else{
+        alert("Contate o administrador do sistema")
+      }
+    },
+    id_produto(id){
+      this.id_prod = id
+      this.outro = false
+      this.mensagem = false
+    },
     produtores() {
       api.get("user").then(response => {
         this.users = Object.assign(response.data.users);
@@ -350,11 +377,14 @@ export default {
     getProdutos() {
       api.get("/product?admin=true").then(response => {
         this.produtos = response.data.products;
-        this.ativos = this.produtos.filter(o => o.status === "Aceito");
+        this.aceitos = this.produtos.filter(o => o.status === "Aceito");
       });
     }
   },
   watch: {
+    outro: function(){
+      this.mensagem = ''
+    },
     tab: function() {
       if (this.tab === "Aceito") {
         this.aceitos = this.produtos.filter(o => o.status === this.tab);
