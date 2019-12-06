@@ -39,7 +39,7 @@
             <v-tab
               v-for="c in categorias"
               :key="c.id"
-              @click="(filtraPorCategoria(c.id))"
+              @click="(gatrack(c.name),filtraPorCategoria(c.id))"
             >{{c.name}}</v-tab>
           </v-tabs>
         </v-card>
@@ -65,6 +65,9 @@ export default {
     };
   },
   methods: {
+    gatrack(name){
+     this.$ga.event('Categoria', 'click', name, 3)
+    },
     filtraPorCategoria(idCat) {
       if (idCat !== 0) {
         this.$router.push({ query: { c: idCat } });

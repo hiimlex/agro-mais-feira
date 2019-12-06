@@ -28,6 +28,7 @@
             :elevation="hover ? 12 : 4"
             link
             :to="{name: 'produto', params:{id: produto.id}}"
+            @click.prevent="gatrack(produto.id)"
           >
             <v-img
               max-height="60%"
@@ -88,6 +89,10 @@ export default {
     }
   },
   methods: {
+    gatrack(id){
+     this.$ga.event('Produto', 'click', id, 2)
+
+    },
     getProdutos() {
       this.produtos = "";
       this.snackbar = false;

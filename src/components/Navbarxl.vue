@@ -45,6 +45,7 @@
           v-for="link in links_guest"
           :key="link.name"
           :to="link.route"
+          @click="gatrack(link.name)"
         >{{link.name}}</v-btn>
       </v-toolbar-items>
       <v-toolbar-items class="hidden-sm-and-down mr-3" v-if="$store.state.login">
@@ -54,6 +55,7 @@
           v-for="link in links_logged"
           :key="link.name"
           :to="link.route"
+          
         >{{link.name}}</v-btn>
       </v-toolbar-items>
          <v-toolbar-items class="hidden-sm-and-down mr-3" v-if="$store.state.admin">
@@ -75,7 +77,7 @@
       <v-divider></v-divider>
       <!-- Links -->
       <v-list dense v-if="!$store.state.login && !$store.state.admin">
-        <v-list-item link color="success" v-for="link in links_guest" :key="link.name" :to="link.route">
+        <v-list-item link color="success" v-for="link in links_guest" :key="link.name" :to="link.route" @click="gatrack(link.name)">
             <v-list-item-icon>
             <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-icon>
@@ -148,6 +150,12 @@ export default {
   },
 
   methods: {
+    gatrack(g){
+      if(g === 'Sobre'){
+         this.$ga.event('Sobre', 'click', 'Visitando Sobre', 1)
+
+      }
+    },
     buscarProdutos() {
       this.$router.push({ query: { s: this.busca } });
     }
