@@ -19,7 +19,7 @@
         lg="3"
         xl="3"
         class="d-flex"
-        v-for="produto in produtos"
+        v-for="produto in orderProdutos"
         :key="produto.id"
       >
         <v-hover v-slot:default="{ hover }">
@@ -36,9 +36,9 @@
               :src="'https://res.cloudinary.com/agromais-iss/image/upload/c_fill,h_500,q_100,w_500/'+produto.img"
             ></v-img>
             <v-card-text class="justify-center mt-n4">
-              <v-card-title class="text-truncate justify-center">{{produto.title}}</v-card-title>
+              <v-card-title class="justify-center "><span class="text-truncate">{{produto.title}}</span></v-card-title>
               <v-row class="justify-center subtitle-1 "><span class="text-truncate">{{produto.user.name}}</span></v-row>
-              <v-row class="justify-center green--text body-1">R$ {{produto.price}}</v-row>
+              <v-row justify="center" align="center" class=" green--text title">{{produto.price | semPreco}}</v-row>
             </v-card-text>
           </v-card>
         </v-hover>
@@ -62,6 +62,15 @@ export default {
       y: "top"
     };
   },
+  filters:{
+    semPreco: function(price){
+      if(price === '0.00' )
+      { return ""
+      }else{
+        return `R$ ${price}`
+      }
+    }
+  },
     beforeUpdate() {
     if (window.localStorage.token) {
       api
@@ -79,6 +88,9 @@ export default {
     }
   },
   computed: {
+     orderProdutos: function () {
+    return _.orderBy(this.produtos, 'id')
+  },
     url() {
       const query = serialize(this.$route.query);
       if (query) {
@@ -100,7 +112,7 @@ export default {
         .get(this.url)
         .then(response => {
           if (response.data) {
-            this.produtos = response.data.products;
+            this.produtos = response.data.products
           }
         })
         .catch(e => {
