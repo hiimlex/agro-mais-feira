@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 import Loading from './components/progress'
 import Banner from './components/banner'
-
+import _ from 'lodash';
 
 Vue.config.productionTip = false
 
