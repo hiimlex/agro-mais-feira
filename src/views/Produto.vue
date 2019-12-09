@@ -45,7 +45,7 @@
                     </div>
                     <div
                       class="display-1 text-justify font-weight-light text-justify mb-2"
-                    >R$ {{produto.price}}</div>
+                    >{{produto.price | semPreco}}</div>
                   </v-container>
                   <v-divider inset></v-divider>
                   <v-container>
@@ -93,7 +93,7 @@
               </div>
               <div
                 class="display-1 text-justify font-weight-light text-justify mb-2"
-              >R$ {{produto.price}}</div>
+              >{{produto.price | semPreco}}</div>
             </v-container>
           </v-card>
         </div>
@@ -141,6 +141,15 @@ export default {
       tab: null,
       tabs: 3
     };
+  },
+    filters:{
+    semPreco: function(price){
+      if(price === '0.00' )
+      { return ""
+      }else{
+        return `R$ ${price}`
+      }
+    }
   },
   methods: {
     voltar() {
